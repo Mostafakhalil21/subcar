@@ -9,6 +9,8 @@ const config = require('./config/database');
 var session = require('express-session');
 app.use(session({ secret: 'SECRET' }));
 
+const Hosting = require('./routes/hosting.route')
+
 //connection to database
 mongoose.connect(config.database);
 
@@ -24,7 +26,8 @@ mongoose.connection.on('error' , (err) =>{
 const users = require('./routes/users.route');
 
 
-//post Number
+
+//port Number
 const port = 3000;
 
 //CORS Middleware
@@ -38,6 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
+require('./config/hostpassport')(passport);
 
 //Index Route
 app.get('/', (req, res) => {
@@ -57,3 +61,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/users', users);
+// app.use('/hosts',hosts)
+
+app.use('/hosts',Hosting);

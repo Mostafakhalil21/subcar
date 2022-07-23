@@ -1,7 +1,10 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const User = require('../models/user.model');
+const Hosting = require('../models/hosting.model');
 const config = require('../config/database');
+
+
+
 
 
 
@@ -12,15 +15,16 @@ module.exports = function (passport) {
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     opts.secretOrKey = config.secret;
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-        User.getUserById(jwt_payload.data._id, (err, user) => {
+        console.log(jwt_payload);
+        Hosting.getHostById(jwt_payload.data._id, (err, hosting) => {
             if (err) 
             {
                 return done(err, false);
             }
 
-            if (user) 
+            if (hosting) 
             {
-                return done(null, user);
+                return done(null, hosting);
             } 
             else 
             {
@@ -29,4 +33,3 @@ module.exports = function (passport) {
         });
     }));
 }
-
