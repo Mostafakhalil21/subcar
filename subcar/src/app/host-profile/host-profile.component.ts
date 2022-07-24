@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HostAuthService } from '../services/host-auth.service';
+import { PostsService } from '../services/posts.service';
+import { post } from '../models/posts.model';
+
 
 @Component({
   selector: 'app-host-profile',
@@ -9,12 +12,15 @@ import { HostAuthService } from '../services/host-auth.service';
 })
 export class HostProfileComponent implements OnInit {
   host:object;
+  post:post[]=[];
   constructor(
     private hostAuth:HostAuthService,
     private route:Router,
+    private postservice:PostsService
   ) { }
 
   ngOnInit(): void {
+    this.getallposts();
 
     this.hostAuth.getProfile().subscribe(profile =>{
       this.host=profile.user;
@@ -24,6 +30,14 @@ export class HostProfileComponent implements OnInit {
       console.log(err);
       return false;
     })
+
+  }
+
+
+  getallposts(){
+  this.postservice.getPosts().subscribe((data) =>{
+    this.post=data;
+  })
   }
 
 }

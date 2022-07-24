@@ -10,7 +10,17 @@ const imagesSchema = new Schema({
 // const postSchema = new Schema({
 //     imagePost: [imagesSchema]
 // });
+const postSchema = mongoose.Schema({
+  hostBusinessName:
+  {
+        type:String,            
+  },
+  hostImages:[{
+      url: {type:String},
+      text: {type:String}
+  }]
 
+});
 
 const AdminSchema = mongoose.Schema({
     name: {

@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
-const imageSchema = new Schema({
+const imageSchema = mongoose.Schema({
   url: {type:String},
   text: {type:String}
 });
 
-const imagesSchema = new Schema({
+const imagesSchema = mongoose.Schema({
   images : [imageSchema]
 });
 
@@ -21,21 +21,55 @@ const HostingSchema = mongoose.Schema({
     },
     email: {
       type: String,
-      required: true
+      required: true,
+      unique:true
     },
     businessName: {
       type: String,
-      required: true
+      required: true,
+      unique:true
     },
     password: {
       type: String,
       required: true
     },
     businessImg: {
-      type: String
+      type: String,
+      default:""
     },
-    adminPosts :[imagesSchema]
-  });
+    coverImg: {
+      type: String,
+      default:""
+    },
+    follower:{
+      type:Array,
+      default:[]
+    },
+    isAdmin:{
+      type:Boolean,
+      default:false
+    },
+    desc:{
+      type:String,
+      max:50
+    },
+    city:{
+      type:String,
+      max:50
+    },
+    from:{
+      type:String,
+      max:50
+    },
+    relationship:{
+      type:Number,
+      enum:[1,2,3]
+    }
+    
+    // hostPosts :[imagesSchema]
+  },
+  { timestamps: true }
+  );
 
   const Hosting = module.exports = mongoose.model('Host', HostingSchema);
 

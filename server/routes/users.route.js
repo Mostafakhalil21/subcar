@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database')
 const User = require('../models/user.model');
 var session = require('express-session');
+const Hosting = require('../models/hosting.model')
+
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -83,5 +85,61 @@ router.post('/register', (req, res, next) => {
       }
     });
   });
+
+
+  //follow a host
+  router.put("/:id/follow" , async (req,res) =>{
+    if(req.body.userId !== req.params.id){
+      try{
+        
+        const host = await Hosting.findById(req.params.id);
+        const currentUser = await User.findById(req.body.userId);
+        if(!host.follower.includes(req.body.userId)){
+
+            await host.updateOne({$push:{follower:req.body.userId}});
+          await currentUser.updateOne({$push:{following:req.params.id}});
+            
+            res.status(200).json("Host has been followed")
+
+        }else{
+          res.status(403).json("you alleady follow this Host")
+        }
+
+      }catch(err){
+        res.status(500).json(err)
+      }
+
+    }else{
+      res.status(403).json("you cant follow yourself")
+    }
+  })
+
+  //unfollow a host
+
+  router.put("/:id/unfollow" , async (req,res) =>{
+    if(req.body.userId !== req.params.id){
+      try{
+        
+        const host = await Hosting.findById(req.params.id);
+        const currentUser = await User.findById(req.body.userId);
+        if(host.follower.includes(req.body.userId)){
+
+            await host.updateOne({$pull:{follower:req.body.userId}});
+          await currentUser.updateOne({$pull:{following:req.params.id}});
+            
+            res.status(200).json("Host has been unfollowed")
+
+        }else{
+          res.status(403).json("you d'ont follow this Host")
+        }
+
+      }catch(err){
+        res.status(500).json(err)
+      }
+
+    }else{
+      res.status(403).json("you cant unfollow yourself")
+    }
+  })
   
   module.exports = router;

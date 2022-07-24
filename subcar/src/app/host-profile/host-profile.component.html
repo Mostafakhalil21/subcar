@@ -6,3 +6,41 @@
         
     </ul>    
     </div>
+
+
+
+    <div class="container posts-content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 " *ngFor="let post of post">
+                  <div class="card-body">
+                    <div class="media mb-3">
+                      <img  class="d-block ui-w-40 rounded-circle" alt="">
+                      <div class="media-body ml-3">
+                        Kenneth Frazier
+                        <div class="text-muted small">3 days ago</div>
+                      </div>
+                    </div>
+                
+                    <p>
+                      {{post.desc}}
+                    </p>
+                    <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('{{post.img}}');"></a>
+                  </div>
+                  <div class="card-footer">
+                    <a href="javascript:void(0)" class="d-inline-block text-muted">
+                        <strong>{{post.likes.length}}</strong><small>Likes</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                        <strong>12</strong> <small>Comments</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                      <small class="align-middle">Repost</small>
+                    </a>
+                  </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+    

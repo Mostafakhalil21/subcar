@@ -25,6 +25,8 @@ mongoose.connection.on('error' , (err) =>{
 
 const users = require('./routes/users.route');
 
+const posts = require('./routes/posts.route')
+
 
 
 //port Number
@@ -64,3 +66,4 @@ app.use('/users', users);
 // app.use('/hosts',hosts)
 
 app.use('/hosts',Hosting);
+app.use('/posts',posts);

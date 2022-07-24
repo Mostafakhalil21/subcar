@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database')
 const Hosting = require('../models/hosting.model')
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
+
 
 
 
@@ -62,7 +64,8 @@ router.post('/register', (req, res, next) => {
               id: host._id,
               name: host.name,
               businessName: host.businessName,
-              email: host.email
+              email: host.email,
+              hostPosts:host.hostPosts
             }
           });
         } 
@@ -81,5 +84,75 @@ router.post('/register', (req, res, next) => {
             user:req.user
       });
     });
+
+
+
+
+
+    // -------------------------------- CRUD ------------------------------
+
+
+
+
+
+    //update user
+
+    router.put("/:id" ,async (req , res ) => {
+      if(req.body.userId === req.params.id){
+          if(req.body.password){
+            try{
+              const salt = await bcrypt.genSalt(10);
+              req.body.password = await bcrypt.hash(req.body.password , salt);
+            }catch(err){
+                return res.status(403).json(err)
+            }
+          }
+          try{
+            const host = await Hosting.findByIdAndUpdate(req.params.id,{
+              $set:req.body,
+            });
+              res.status(200).json("Account has been updated")
+          }catch(err){
+            return res.status(403).json(err)
+
+          }
+      }else {
+          return res.status(403).json("you can update only your account")
+      }
+
+
+    });
+    //delete user
+    router.delete("/:id" ,async (req , res ) => {
+      if(req.body.userId === req.params.id){
+   
+          try{
+            const host = await Hosting.findByIdAndRemove(req.params.id);
+              res.status(200).json("Account has been deleted")
+          }catch(err){
+            return res.status(403).json(err)
+
+          }
+      }else {
+          return res.status(403).json("you can delete only your account")
+      }
+
+
+    });
+
+    //get a user
+router.get("/:id" , async (req,res) =>{
+  try{
+    const host = await Hosting.findById(req.params.id);
+    const {password , updatedAt, ...other} = host._doc // not sending other and updateAt
+    res.status(200).json(other)
+
+  }catch(err){
+    res.status(500).json(err);
+  }
+})
+
+    //unfollow a user
+ 
 
   module.exports = router;
