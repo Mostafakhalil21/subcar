@@ -12,6 +12,8 @@ export class PostsService {
   key=localStorage.getItem('host')
   data = JSON.parse(this.key)
   id= this.data[Object.keys(this.data)[0]]
+  name = this.data[Object.keys(this.data)[2]]
+  businessImg = this.data[Object.keys(this.data)[4]]
   baseURL: string = 'http://localhost:3000/posts/';
   headers = { 'content-type': 'application/json' };
   constructor(private http:HttpClient) { }
@@ -20,7 +22,7 @@ export class PostsService {
   
 
   createPost(Post:post):Observable<any>{
-    let body = JSON.stringify(new post(this.id,Post.img,Post.desc))
+    let body = JSON.stringify(new post(this.name,this.businessImg,this.id,Post.img,Post.desc,Post.cartype,Post.kms,Post.ownersnumber,Post.carcolor,Post.caryear))
     return this.http.post(this.baseURL + 'createpost' ,body,{
       headers:this.headers
     });
@@ -28,6 +30,11 @@ export class PostsService {
 
 
   getPosts():Observable<any>{
+    return this.http.get('http://localhost:3000/posts/posts/'+`${this.id}`)
+  }
+
+
+  getFollowingPosts():Observable<any>{
     return this.http.get('http://localhost:3000/posts/posts/'+`${this.id}`)
   }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ValidateService } from '../services/validate.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { HostAuthService } from '../services/host-auth.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-host-register',
   templateUrl: './host-register.component.html',
@@ -16,6 +16,7 @@ export class HostRegisterComponent implements OnInit {
   email:String;
   password:String;
   businessImg:String;
+  city:String;
   constructor(
     private validateservice:ValidateService ,
     private flashMessage:FlashMessagesService,
@@ -24,6 +25,24 @@ export class HostRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    $(document).ready(function(){
+      $('#goRight').on('click', function(){
+        $('#slideBox').animate({
+          'marginLeft' : '0'
+        });
+        $('.topLayer').animate({
+          'marginLeft' : '100%'
+        });
+      });
+      $('#goLeft').on('click', function(){
+        $('#slideBox').animate({
+          'marginLeft' : '50%'
+        });
+        $('.topLayer').animate({
+          'marginLeft': '0'
+        });
+      });
+    });
   }
   OnRegisterSubmit(){
     const host = {
@@ -31,7 +50,8 @@ export class HostRegisterComponent implements OnInit {
      email:this.email,
      businessName:this.businessName,
      password:this.password,
-     businessImg:this.businessImg
+     businessImg:this.businessImg,
+     city:this.city
     }
  
     //required fields

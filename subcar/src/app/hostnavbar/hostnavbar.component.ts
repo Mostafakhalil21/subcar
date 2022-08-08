@@ -4,23 +4,22 @@ import { FlashMessagesService } from 'flash-messages-angular';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-hostnavbar',
+  templateUrl: './hostnavbar.component.html',
+  styleUrls: ['./hostnavbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class HostnavbarComponent implements OnInit {
 
   constructor(
     public authservice:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService  
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     console.log(this.authservice.loggedIn())
-
-    
   }
+
 
   onLogoutClick(){
     this.authservice.logout();
@@ -28,8 +27,7 @@ export class NavbarComponent implements OnInit {
       cssClass:'alert-success',
       timeout:3000
     });
-    this.router.navigate(['/login']);
+    this.router.navigate(['/hostlogin']);
     return false;
 }
-
 }

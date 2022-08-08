@@ -12,6 +12,8 @@ import { HostDashboardComponent } from './host-dashboard/host-dashboard.componen
 import { HostLoginComponent } from './host-login/host-login.component';
 import { HostProfileComponent } from './host-profile/host-profile.component';
 import { HostAuthGuard } from './guards/hostAuth.guard';
+import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 const routes: Routes = [
   { path:'',pathMatch:'full',redirectTo:'login'},
@@ -21,10 +23,12 @@ const routes: Routes = [
   { path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
   { path:'profile', component:ProfileComponent , canActivate:[AuthGuard]},
   { path:'navbar', component:NavbarComponent},
+  { path:'hostnavbar', component:HostnavbarComponent},
   { path:'hostregister', component:HostRegisterComponent },
   { path:'hostdashboard', component:HostDashboardComponent,canActivate:[HostAuthGuard]},
   { path:'hostlogin', component:HostLoginComponent},
   { path:'hostprofile', component:HostProfileComponent ,canActivate:[HostAuthGuard]},
+  { path:'businessprofile', component:BusinessProfileComponent ,canActivate:[HostAuthGuard]},
 
 
 

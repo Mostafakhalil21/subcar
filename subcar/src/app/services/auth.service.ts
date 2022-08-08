@@ -35,7 +35,6 @@ export class AuthService {
         headers:this.headers
     })
   }
-
   getProfile() :Observable<any>{
     const token = localStorage.getItem('id_token');
     const httpOptions = {

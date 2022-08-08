@@ -8,7 +8,7 @@ var session = require('express-session');
 const Hosting = require('../models/hosting.model')
 
 
-// Register
+// user Register
 router.post('/register', (req, res, next) => {
     let newUser = new User({
       name: req.body.name,
@@ -62,7 +62,11 @@ router.post('/register', (req, res, next) => {
               id: user._id,
               name: user.name,
               username: user.username,
-              email: user.email
+              email: user.email,
+              following:user.following,
+              userImage:user.userImage,
+              
+              
             }
           });
         } 
@@ -88,7 +92,7 @@ router.post('/register', (req, res, next) => {
 
 
   //follow a host
-  router.put("/:id/follow" , async (req,res) =>{
+  router.put("/follow/:id" , async (req,res) =>{
     if(req.body.userId !== req.params.id){
       try{
         
@@ -141,5 +145,8 @@ router.post('/register', (req, res, next) => {
       res.status(403).json("you cant unfollow yourself")
     }
   })
+
+
+  
   
   module.exports = router;

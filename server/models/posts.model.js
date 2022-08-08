@@ -3,53 +3,14 @@ const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
 
-// const imageSchema = mongoose.Schema({
-//     url: {type:String},
-//     text: {type:String}
-//   });
-  
-//   const imagesSchema = mongoose.Schema({
-//     images : [imageSchema]
-//   });
-
-//   const postSchema = mongoose.Schema({
-//         hostBusinessName:
-//         {
-//               type:String,
-//         },
-//         hostPosts:[imagesSchema]
-
-//   });
-
-
-// const postSchema = new mongoose.Schema(
-//       {
-//         userId: {
-//           type: mongoose.Schema.Types.ObjectId,
-//           ref: 'Hosting'
-//         },
-//         images: [
-//           {
-//             url: String,
-//             name: String,
-//             text: String
-//           }
-//         ],
-//         active: {
-//           type: Boolean,
-//           default: true
-//         },
-//         modifiedOn: {
-//           type: Date,
-//           default: Date.now
-//         }
-//       },
-//       { timestamps: true }
-//     );
-
-
 const postSchema = new mongoose.Schema(
   {
+    hostName:{
+      type: String,
+    },
+    businessImg:{
+      type: String,
+    },
     userId: {
       type: String,
       
@@ -61,10 +22,29 @@ const postSchema = new mongoose.Schema(
     img:{
       type:String
     },
+    cartype:{
+      type:String,
+    },
+    kms:{
+      type:String,
+    },
+    ownersnumber:{
+      type:String,
+
+    },
+    carcolor:{
+      type:String,
+    },
+    caryear:{
+      type:String,
+    },
     likes:{
       type:Array,
       default:[]
-    }
+    },
+    viewed:{
+      type:Number,
+    },
   },
   { timestamps: true }
 );

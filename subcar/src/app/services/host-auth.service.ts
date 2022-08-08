@@ -12,7 +12,7 @@ export class HostAuthService {
   authToken :any ;
   host:any;
 
-
+id :any;
   baseURL: string = 'http://localhost:3000/hosts/';
   headers = { 'content-type': 'application/json' };
   helper = new JwtHelperService();
@@ -51,6 +51,10 @@ getProfile() :Observable<any>{
   )}
 
 
+
+  
+
+
   storeHostData(token , host){
     localStorage.setItem('id_token' , token);
     localStorage.setItem('host',JSON.stringify(host));
@@ -80,5 +84,13 @@ loggedIn(){
 loggedInn(){
   return !!localStorage.getItem('id_token')
  }
+
+ gethostdetails(hostId){
+this.id=hostId;
+ }
+//  sendhostdetails():Observable<any>{
+//   return this.http.get(this.baseURL+ 'gethost/'+`${"62dd2300b2062bc6660ae73d"}`)
+
+// }
 
 }

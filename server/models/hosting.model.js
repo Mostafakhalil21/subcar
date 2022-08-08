@@ -2,19 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
-const imageSchema = mongoose.Schema({
-  url: {type:String},
-  text: {type:String}
-});
-
-const imagesSchema = mongoose.Schema({
-  images : [imageSchema]
-});
-
-// const postSchema = new Schema({
-//   imagePost: [imagesSchema]
-// });
-
 const HostingSchema = mongoose.Schema({
     name: {
       type: String
@@ -65,8 +52,6 @@ const HostingSchema = mongoose.Schema({
       type:Number,
       enum:[1,2,3]
     }
-    
-    // hostPosts :[imagesSchema]
   },
   { timestamps: true }
   );

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { HostAuthService } from '../services/host-auth.service';
+import { ValidateService } from '../services/validate.service';
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-host-login',
   templateUrl: './host-login.component.html',
@@ -10,8 +13,12 @@ import { HostAuthService } from '../services/host-auth.service';
 export class HostLoginComponent implements OnInit {
   businessName:String;
   password:String;
-
+  name:String;
+  email:String;
+  businessImg:String;
+  city:String;
   constructor(
+    private validateservice:ValidateService ,
     private hostAuth:HostAuthService, 
     private router:Router,
     private flashMessage:FlashMessagesService,
@@ -19,6 +26,24 @@ export class HostLoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    $(document).ready(function(){
+      $('#goRight').on('click', function(){
+        $('#slideBox').animate({
+          'marginLeft' : '0'
+        });
+        $('.topLayer').animate({
+          'marginLeft' : '100%'
+        });
+      });
+      $('#goLeft').on('click', function(){
+        $('#slideBox').animate({
+          'marginLeft' : '50%'
+        });
+        $('.topLayer').animate({
+          'marginLeft': '0'
+        });
+      });
+    });
   }
 
 
@@ -37,7 +62,7 @@ export class HostLoginComponent implements OnInit {
           cssClass: 'alert-success',
           timeout:5000
         });
-        this.router.navigate(['hostdashboard'])
+        this.router.navigate(['hostprofile'])
       }
       else
       {
@@ -47,5 +72,44 @@ export class HostLoginComponent implements OnInit {
     })
 
   }
+
+
+  OnRegisterSubmit(){
+    const host = {
+     name: this.name,
+     email:this.email,
+     businessName:this.businessName,
+     password:this.password,
+     businessImg:this.businessImg,
+     city:this.city
+    }
+ 
+    //required fields
+    if(!this.validateservice.validateRegister(host))
+    {
+     this.flashMessage.show("please fill  all fields" , {cssClass: 'alert-danger' , timeout:3000});
+     
+    }
+    // validate Email 
+    if(!this.validateservice.validateEmail(host.email))
+    {
+     this.flashMessage.show("please use a valid email", {cssClass: 'alert-danger' , timeout:3000});
+     return false;
+    }
+ 
+    //Register user
+    this.hostAuth.registerHost(host).subscribe(data =>{
+     if(data)
+     {
+       this.flashMessage.show("You are now registered , You can log in", {cssClass: 'alert-success' , timeout:3000});
+       this.router.navigate(['/hostlogin'])
+     }
+     else
+     {
+       this.flashMessage.show("Something went wrong", {cssClass: 'alert-danger' , timeout:3000});
+       this.router.navigate(['/register'])
+     }
+    })
+   }
 
 }

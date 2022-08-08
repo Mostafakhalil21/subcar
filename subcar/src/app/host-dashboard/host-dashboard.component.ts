@@ -17,13 +17,14 @@ key =  localStorage.getItem("host")
 
   img:String;
   desc:String;
-post=new post("","","")
+post=new post("","","","","","","","","","",)
   constructor(
     private router:Router,
     private postsservice:PostsService
     ) { }
 
   ngOnInit(): void {
+    
   }
 // this.data[Object.keys(this.data)[0]]
 

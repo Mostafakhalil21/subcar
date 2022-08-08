@@ -11,12 +11,19 @@ import { post } from '../models/posts.model';
   styleUrls: ['./host-profile.component.css']
 })
 export class HostProfileComponent implements OnInit {
+  key =  localStorage.getItem("host")
+ data = JSON.parse(this.key)
+ img:String;
+ desc:String;
+ Post=new post("","","","","","","","","","")
   host:object;
   post:post[]=[];
   constructor(
     private hostAuth:HostAuthService,
     private route:Router,
-    private postservice:PostsService
+    private postservice:PostsService,
+    
+    
   ) { }
 
   ngOnInit(): void {
@@ -39,5 +46,12 @@ export class HostProfileComponent implements OnInit {
     this.post=data;
   })
   }
+
+  OnPostSubmit(){
+    this.postservice.createPost(this.Post).subscribe(res => {
+     console.log("works")
+     
+    })
+ }
 
 }

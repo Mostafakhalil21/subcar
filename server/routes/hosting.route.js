@@ -5,13 +5,9 @@ const config = require('../config/database')
 const Hosting = require('../models/hosting.model')
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const User = require('../models/user.model');
 
-
-
-
-
-
-
+// Host register
 router.post('/register', (req, res, next) => {
     let newHoste = new Hosting({
       name: req.body.name,
@@ -31,6 +27,7 @@ router.post('/register', (req, res, next) => {
       }
     });
   });
+
  // Authenticate
   router.post('/authenticate', (req, res, next) => {
     const businessName = req.body.businessName;
@@ -65,7 +62,9 @@ router.post('/register', (req, res, next) => {
               name: host.name,
               businessName: host.businessName,
               email: host.email,
-              hostPosts:host.hostPosts
+              hostPosts:host.hostPosts,
+              businessImg:host.businessImg,
+              follower:host.follower
             }
           });
         } 
@@ -85,14 +84,30 @@ router.post('/register', (req, res, next) => {
       });
     });
 
+  
+    // get the hosts which user is not following
+    router.get("/allHosts/:id" , async (req , res ) => {
+      try{
+            const now = await Hosting.find({'follower':{$ne :req.params.id}});
+        res.json(now)
+      }catch(err){
+        res.status(500).json(err);
+    
+      }
+    })
+// get all hosts that user Follow
+    router.get("/getfollowerhost/:id" , async (req , res ) => {
+      try{
+            const now = await Hosting.find({'follower':req.params.id});
+        res.json(now)
+      }catch(err){
+        res.status(500).json(err);
+    
+      }
+    })
 
-
-
-
+  
     // -------------------------------- CRUD ------------------------------
-
-
-
 
 
     //update user
@@ -140,8 +155,8 @@ router.post('/register', (req, res, next) => {
 
     });
 
-    //get a user
-router.get("/:id" , async (req,res) =>{
+    //get a host
+router.get("/gethost/:id" , async (req,res) =>{
   try{
     const host = await Hosting.findById(req.params.id);
     const {password , updatedAt, ...other} = host._doc // not sending other and updateAt

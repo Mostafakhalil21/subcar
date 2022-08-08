@@ -21,6 +21,8 @@ import { HostLoginComponent } from './host-login/host-login.component';
 import { HostRegisterComponent } from './host-register/host-register.component';
 import { HostProfileComponent } from './host-profile/host-profile.component';
 import { HostAuthGuard } from './guards/hostAuth.guard';
+import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { HostAuthGuard } from './guards/hostAuth.guard';
     HostLoginComponent,
     HostRegisterComponent,
     HostProfileComponent,
+    HostnavbarComponent,
+    BusinessProfileComponent,
     
   ],
   imports: [
