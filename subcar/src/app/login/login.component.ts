@@ -45,6 +45,10 @@ export class LoginComponent implements OnInit {
         });
       });
     });
+
+
+
+
   }
 
   onLoginSubmit(){
@@ -62,7 +66,11 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert-success',
           timeout:5000
         });
-        this.router.navigate(['home'])
+        
+        this.router.navigate(['home']).then(()=>{
+          window.location.reload();
+        })
+        
       }
       else
       {

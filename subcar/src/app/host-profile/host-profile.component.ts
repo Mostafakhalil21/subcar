@@ -27,7 +27,7 @@ export class HostProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getallposts();
+    
 
     this.hostAuth.getProfile().subscribe(profile =>{
       this.host=profile.user;
@@ -37,6 +37,11 @@ export class HostProfileComponent implements OnInit {
       console.log(err);
       return false;
     })
+
+    this.postservice.refreshNeeded$.subscribe(()=>{
+      this.getallposts();
+    })
+    this.getallposts();
 
   }
 

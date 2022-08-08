@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable , Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 
@@ -17,7 +17,11 @@ export class AuthService {
   baseURL: string = 'http://localhost:3000/users/';
   headers = { 'content-type': 'application/json' };
   helper = new JwtHelperService();
-  
+  private _refreshNeeded$ = new Subject<void>();
+
+  get refreshNeeded$(){
+    return this._refreshNeeded$;
+  }
 
   
   constructor(private http:HttpClient) { }
@@ -33,7 +37,9 @@ export class AuthService {
     authenticateUser(user):Observable<any>{
       return this.http.post(this.baseURL + 'authenticate' , user , {
         headers:this.headers
-    })
+    }).pipe(tap(()=>{
+      this._refreshNeeded$.next();
+    }));
   }
   getProfile() :Observable<any>{
     const token = localStorage.getItem('id_token');

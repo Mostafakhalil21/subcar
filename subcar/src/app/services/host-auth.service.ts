@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable , Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -20,6 +20,7 @@ id :any;
   
   constructor(private http:HttpClient) { }
 
+ 
 
   registerHost(host):Observable<any>{
      

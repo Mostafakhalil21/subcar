@@ -62,7 +62,9 @@ export class HostLoginComponent implements OnInit {
           cssClass: 'alert-success',
           timeout:5000
         });
-        this.router.navigate(['hostprofile'])
+        this.router.navigate(['hostprofile']).then(()=>{
+          window.location.reload();
+        })
       }
       else
       {

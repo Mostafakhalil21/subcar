@@ -45,10 +45,15 @@ following:object;
   }
 
   ngOnInit(): void {
-
+    this.userpost.refreshNeeded$.subscribe(()=>{
+      this.getallposts();
+      this.getAllHosts();
+      this.getfollowinghosts();
+    });
     this.getallposts();
     this.getAllHosts();
     this.getfollowinghosts();
+    
  
   }
 

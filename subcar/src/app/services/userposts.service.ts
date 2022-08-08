@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable , Subject } from 'rxjs';
 import { host } from '../models/host.model';
 import { Injectable } from '@angular/core';
 
@@ -20,7 +20,11 @@ export class UserpostsService {
   headers = { 'content-type': 'application/json' };
 
   constructor(private http:HttpClient) { }
+  private _refreshNeeded$ = new Subject<void>();
 
+  get refreshNeeded$(){
+    return this._refreshNeeded$;
+  }
 
 
   getFollowingPosts():Observable<any>{
