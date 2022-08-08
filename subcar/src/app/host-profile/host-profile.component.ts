@@ -48,7 +48,9 @@ export class HostProfileComponent implements OnInit {
 
   getallposts(){
   this.postservice.getPosts().subscribe((data) =>{
-    this.post=data;
+    let flatData=data.flat();
+    flatData.reverse();
+    this.post=flatData;
   })
   }
 
