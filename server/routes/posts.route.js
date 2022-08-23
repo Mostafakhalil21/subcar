@@ -64,7 +64,7 @@ router.delete("/posts/:id", async (req, res) => {
 });
 
 //like / dislike a post
-router.put("/:id/like" ,async (req , res ) => {
+router.put("/like/:id" ,async (req , res ) => {
   try{
     const post = await Post.findById(req.params.id);
     if(!post.likes.includes(req.body.userId)){;

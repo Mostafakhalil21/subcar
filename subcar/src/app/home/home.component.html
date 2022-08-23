@@ -68,7 +68,7 @@
   <div class="online_status active"><i class="fas fa-circle"></i></div>
       <div class="friend_name">{{follow.businessName}}</div>
       <div class="flex-end">
-      <button (click)="followHost(host._id)"type="submit">Unfollow</button>
+      <button (click)="unfollowHost(follow._id)"type="submit">Unfollow</button>
     </div>
     </div>
   <!-- <b>Your Active Groups</b>
@@ -246,7 +246,7 @@ Trip to Woodbine Beach with owner. Lots dirt, mud, rolling. 😂😂😂
     
     
     <div  class="reacts">
-      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+      <a (click)="likepost(post._id)" class="card-link"><i class="fas fa-thumbs-up fa-lg"></i></a>
       {{post.likes.length}}
     </div>
     

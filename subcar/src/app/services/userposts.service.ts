@@ -1,7 +1,9 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Observable , Subject } from 'rxjs';
 import { host } from '../models/host.model';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +45,28 @@ export class UserpostsService {
 
   followHost(hostId):Observable<any>{
     let body = JSON.stringify(new host(this.id))
-    return this.http.put('http://localhost:3000/hosts/follow/'+ `${hostId}` ,body,{
-      headers:this.headers})
+    return this.http.put('http://localhost:3000/users/follow/'+ `${hostId}` ,body,{
+      headers:this.headers}).pipe(tap(() =>{
+        this._refreshNeeded$.next();
+      }));
   
+  }
+
+  UnfollowHost(hostId):Observable<any>{
+    let body = JSON.stringify(new host(this.id))
+    return this.http.put('http://localhost:3000/users/unfollow/'+ `${hostId}` ,body,{
+      headers:this.headers}).pipe(tap(() =>{
+        this._refreshNeeded$.next();
+      }));
+  
+  }
+  //like / dislike a post
+  likePost(postId):Observable<any>{
+    let body = JSON.stringify(new host(this.id))
+    return this.http.put('http://localhost:3000/posts/like/'+ `${postId}` ,body,{
+      headers:this.headers}).pipe(tap(() =>{
+        this._refreshNeeded$.next();
+      }));
   }
 
 

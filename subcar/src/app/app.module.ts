@@ -49,6 +49,9 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     HttpClientModule,
     FlashMessagesModule.forRoot(),
     
+
+   
+    
     
   ],
   providers: [ValidateService , AuthService , AuthGuard , HostAuthGuard],

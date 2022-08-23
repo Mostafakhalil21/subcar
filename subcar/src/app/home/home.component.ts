@@ -78,8 +78,15 @@ following:object;
     }
 followHost(host){
   this.userpost.followHost(host).subscribe((data)=> {
-    console.log(host._id)
+   
   })
+  console.log(host)
+}
+unfollowHost(host){
+  this.userpost.UnfollowHost(host).subscribe((data)=> {
+   
+  })
+  console.log(host)
 }
 
 refresh(): void {
@@ -99,5 +106,10 @@ onLogoutClick(){
   });
   this.router.navigate(['/login']);
   return false;
+}
+
+likepost(postId){
+  this.userpost.likePost(postId).subscribe((data) => {
+  })
 }
 }

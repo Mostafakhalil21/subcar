@@ -45,4 +45,5 @@ export class PostsService {
   getFollowingPosts():Observable<any>{
     return this.http.get('http://localhost:3000/posts/posts/'+`${this.id}`)
   }
+
 }

@@ -120,7 +120,7 @@ router.post('/register', (req, res, next) => {
 
   //unfollow a host
 
-  router.put("/:id/unfollow" , async (req,res) =>{
+  router.put("/unfollow/:id" , async (req,res) =>{
     if(req.body.userId !== req.params.id){
       try{
         
