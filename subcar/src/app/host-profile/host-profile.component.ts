@@ -13,11 +13,21 @@ import { post } from '../models/posts.model';
 export class HostProfileComponent implements OnInit {
   key =  localStorage.getItem("host")
  data = JSON.parse(this.key)
- img:String;
- desc:String;
+ id= this.data[Object.keys(this.data)[0]]
+ name = this.data[Object.keys(this.data)[2]]
+ businessImg = this.data[Object.keys(this.data)[4]]
+ img;
+ 
  Post=new post("","","","","","","","","","")
   host:object;
   post:post[]=[];
+
+  cartype;
+  kms;
+  ownersnumber;
+  carcolor;
+  caryear;
+  desc;
   constructor(
     private hostAuth:HostAuthService,
     private route:Router,
@@ -44,6 +54,10 @@ export class HostProfileComponent implements OnInit {
     this.getallposts();
 
   }
+  selectImage(event){
+    this.img = event.target.files[0];
+   
+  }
 
 
   getallposts(){
@@ -55,7 +69,20 @@ export class HostProfileComponent implements OnInit {
   }
 
   OnPostSubmit(){
-    this.postservice.createPost(this.Post).subscribe(res => {
+    let formdata = new FormData();
+    formdata.set("hostName" , this.name)
+    formdata.set("userId" , this.id)
+    formdata.set("businessImg" , this.businessImg)
+    formdata.set("hostImage" , this.img)
+    formdata.set("cartype" , this.cartype)
+    formdata.set("kms" , this.kms)
+    formdata.set("ownersnumber" , this.ownersnumber)
+    formdata.set("carcolor" , this.carcolor)
+    formdata.set("caryear" , this.caryear)
+    formdata.set("desc" , this.desc)
+    
+
+    this.postservice.createPost(formdata).subscribe(res => {
      console.log("works")
      
     })

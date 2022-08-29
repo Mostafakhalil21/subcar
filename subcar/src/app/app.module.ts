@@ -23,6 +23,8 @@ import { HostProfileComponent } from './host-profile/host-profile.component';
 import { HostAuthGuard } from './guards/hostAuth.guard';
 import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
     FlashMessagesModule.forRoot(),
     
 

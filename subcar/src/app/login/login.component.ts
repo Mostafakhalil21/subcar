@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { ValidateService } from '../services/validate.service';
 import * as $ from 'jquery';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -13,10 +14,11 @@ import * as $ from 'jquery';
 })
 export class LoginComponent implements OnInit {
 
-  username:String;
-  password:String;
-  name:String;
-  email:String;
+  username;
+  password;
+  name;
+  email;
+  userImage;
 
   constructor(
     private validateservice:ValidateService ,
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     private authServer:AuthService, 
     private router:Router,
     private flashMessage:FlashMessagesService,
+    private http:HttpClient
     ) { }
 
   ngOnInit(): void {
@@ -51,7 +54,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+
   onLoginSubmit(){
+
   
     const user = {
       username :this.username,
@@ -81,33 +86,45 @@ export class LoginComponent implements OnInit {
 
   }
 
+  selectImage(event){
+    this.userImage = event.target.files[0];
+   
+  }
   OnRegisterSubmit(){
-    const user = {
-     name: this.name,
-     email:this.email,
-     username:this.username,
-     password:this.password
-    }
+    let formdata = new FormData();
+    formdata.set("name" , this.name)
+    formdata.set("email" , this.email)
+    formdata.set("username" , this.username)
+    formdata.set("password" , this.password)
+    formdata.set("hostImage" , this.userImage)
+    
+    // const user = {
+    //  name: this.name,
+    //  email:this.email,
+    //  username:this.username,
+    //  password:this.password
+    // }
  
     //required fields
-    if(!this.validateservice.validateRegister(user))
+    if(!this.validateservice.validateRegister(formdata))
     {
      this.flashMessage.show("please fill  all fields" , {cssClass: 'alert-danger' , timeout:3000});
      
     }
     // validate Email 
-    if(!this.validateservice.validateEmail(user.email))
+    if(!this.validateservice.validateEmail(formdata.get("email")))
     {
      this.flashMessage.show("please use a valid email", {cssClass: 'alert-danger' , timeout:3000});
      return false;
     }
  
     //Register user
-    this.authservice.registerUser(user).subscribe(data =>{
+    this.authservice.registerUser(formdata).subscribe(data =>{
      if(data)
      {
        this.flashMessage.show("You are now registered , You can log in", {cssClass: 'alert-success' , timeout:3000});
        this.router.navigate(['/login'])
+       location.reload();
      }
      else
      {

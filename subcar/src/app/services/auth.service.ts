@@ -29,7 +29,6 @@ export class AuthService {
   registerUser(user):Observable<any>{
      
       return this.http.post(this.baseURL + 'register' , user , {
-        headers:this.headers
       })
     }
 

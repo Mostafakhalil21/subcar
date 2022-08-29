@@ -6,11 +6,66 @@ const passport = require('passport');
 const Post = require('../models/posts.model')
 const Hosting = require('../models/hosting.model')
 const User = require('../models/user.model');
+const multer = require("multer");
+
+
+const storage = multer.diskStorage({
+  destination: function(req , file , cb) {
+    cb(null , './uploads');
+  },
+  filename:function(req , file , cb) {
+    cb(null , file.originalname)
+  }
+})
+
+
+const fileFilter = (req , file , cb) => {
+  // reject a file 
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+  cb (null , true );
+  }else{
+    cb ( null ,false );
+  }
+};
+const upload = multer({
+  storage:storage, 
+  limits: {
+  fileSize: 1024 * 1024 * 5
+},
+fileFilter:fileFilter
+});
+
+
+
+// //Storage 
+// const Storage = multer.diskStorage({
+//   destination:'uploads' ,
+//   filename:(req,file,cb) => {
+//     cb(null , file.originalname);
+//   },
+// })
+
+// const upload = multer({
+//   storage:Storage
+// }).single('testImage')
 
 
 // create a post
-router.post("/createpost" , async(req,res) =>{
-  const newPost = new Post(req.body)
+router.post("/createpost" , upload.single('hostImage') , async(req,res) =>{
+  const newPost = new Post({
+    hostName:req.body.hostName,
+    businessImg:req.body.businessImg,
+    userId:req.body.userId,
+     img:req.file.path,
+    cartype:req.body.cartype,
+    kms:req.body.kms,
+    ownersnumber:req.body.ownersnumber,
+    carcolor:req.body.carcolor,
+    caryear:req.body.caryear,
+    desc:req.body.desc,
+   
+
+  })
   try{
     const savePost = await newPost.save();
     res.status(200).json(savePost)
@@ -111,17 +166,17 @@ router.get("/timeline/:id" , async (req , res ) => {
   }
 })
 
-// router.get('/newPost/:id', (req, res) => {
-//   Post.find({userId:req.params.id}).sort({
-//     _id:-1
-//   }).limit(1).exec(function (err, docs) {
-//       if (!err) {
-//           res.send(docs);
-//       } else {
-//           console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2));
-//       }
-//   });
-// });
+router.get('/newPost/:id', (req, res) => {
+  Post.find({userId:req.params.id}).sort({
+    _id:-1
+  }).limit(1).exec(function (err, docs) {
+      if (!err) {
+          res.send(docs);
+      } else {
+          console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2));
+      }
+  });
+});
 
 
 module.exports = router;

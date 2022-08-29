@@ -22,7 +22,8 @@ const HostingSchema = mongoose.Schema({
     },
     businessImg: {
       type: String,
-      default:""
+      default:"",
+      
     },
     coverImg: {
       type: String,

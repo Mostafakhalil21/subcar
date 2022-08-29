@@ -27,14 +27,22 @@ export class PostsService {
 
   
 
-  createPost(Post:post):Observable<any>{
-    let body = JSON.stringify(new post(this.name,this.businessImg,this.id,Post.img,Post.desc,Post.cartype,Post.kms,Post.ownersnumber,Post.carcolor,Post.caryear))
-    return this.http.post(this.baseURL + 'createpost' ,body,{
-      headers:this.headers
+  // createPost(Post:post):Observable<any>{
+  //   let body = JSON.stringify(new post(this.name,this.businessImg,this.id,Post.img,Post.desc,Post.cartype,Post.kms,Post.ownersnumber,Post.carcolor,Post.caryear))
+  //   return this.http.post(this.baseURL + 'createpost' ,body,{
+  //   }).pipe(tap(() =>{
+  //     this._refreshNeeded$.next();
+  //   }));
+  // }
+  createPost(Post):Observable<any>{
+   
+    return this.http.post(this.baseURL + 'createpost' ,Post,{
+  
     }).pipe(tap(() =>{
       this._refreshNeeded$.next();
     }));
   }
+  
 
 
   getPosts():Observable<any>{

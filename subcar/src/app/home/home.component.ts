@@ -8,6 +8,12 @@ import { DatePipe } from '@angular/common';
 import * as $ from 'jquery';
 import { HostAuthService } from '../services/host-auth.service';
 import { FlashMessagesComponent, FlashMessagesService } from 'flash-messages-angular';
+import { NgModel } from '@angular/forms';
+import { HostProfileComponent } from '../host-profile/host-profile.component';
+
+
+
+
 
 
 
@@ -31,13 +37,17 @@ export class HomeComponent implements OnInit {
   username = this.data[Object.keys(this.data)[2]]
   userImage = this.data[Object.keys(this.data)[5]]
 following:object;
+closeResult = '';
+
+imagePath:any='http://localhost:3000/';
   constructor(
 
     private router:Router,
     private authservice:AuthService,
     private userpost:UserpostsService,
     private hostAuth:HostAuthService,
-    private flashMessage:FlashMessagesService  
+    private flashMessage:FlashMessagesService,
+  
 
     
   ) { 
@@ -56,6 +66,8 @@ following:object;
     
  
   }
+
+
 
   getallposts(){
     this.userpost.getFollowingPosts().subscribe((data) =>{
@@ -112,4 +124,24 @@ likepost(postId){
   this.userpost.likePost(postId).subscribe((data) => {
   })
 }
+// open() {
+//   this.modalService.model.open(HostProfileComponent, {size: 'lg'}).result.then((result) => {
+//     this.closeResult = `Closed with: ${result}`;
+//   }, (reason) => {
+//     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+//   });
+  
+// }
+// private getDismissReason(reason: any): string {
+//   if (reason === ModalDismissReasons.ESC) {
+//     return 'by pressing ESC';
+//   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+//     return 'by clicking on a backdrop';
+//   } else {
+//     return `with: ${reason}`;
+//   }
+// }
+
 }
+
+

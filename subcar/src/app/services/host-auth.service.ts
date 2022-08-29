@@ -25,7 +25,6 @@ id :any;
   registerHost(host):Observable<any>{
      
     return this.http.post(this.baseURL + 'register' , host , {
-      headers:this.headers
     })
   }
 

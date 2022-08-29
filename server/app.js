@@ -35,8 +35,19 @@ const port = 3000;
 //CORS Middleware
 app.use(cors());
 
+// a middleware to make out uploads folder public for everyone
+app.use('/uploads',express.static('uploads'));
+
+
 // body parser middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    parameterLimit: 100000,
+    extended: true 
+  }));
 
 //passport Middleware
 app.use(passport.initialize());

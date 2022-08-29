@@ -85,13 +85,16 @@
             <input [(ngModel)]="businessName" name="businessName" type="text" placeholder="Business Name" />
           </div>
           <div class="form-group">
-            <input [(ngModel)]="businessImg" name="businessImg" type="text" placeholder="businessImg" />
-          </div>
-          <div class="form-group">
             <input [(ngModel)]="city" name="city" type="text" placeholder="City" />
           </div>
           <div class="form-group">
             <input [(ngModel)]="password" name="password" type="text" placeholder="Password" />
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="likeabuttonstyle" for="files">Choose a Photo</label>
+            <input id="files" style="visibility:hidden;" [(ngModel)]="businessImg" name="businessImg" type="file" placeholder="businessImg" (change)="selectImage($event)"/>
+            
           </div>
    
           <div class="form-group"></div>

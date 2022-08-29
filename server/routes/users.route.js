@@ -6,15 +6,42 @@ const config = require('../config/database')
 const User = require('../models/user.model');
 var session = require('express-session');
 const Hosting = require('../models/hosting.model')
+const multer = require("multer");
 
+const storage = multer.diskStorage({
+  destination: function(req , file , cb) {
+    cb(null , './uploads');
+  },
+  filename:function(req , file , cb) {
+    cb(null , file.originalname)
+  }
+})
+
+
+const fileFilter = (req , file , cb) => {
+  // reject a file 
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+  cb (null , true );
+  }else{
+    cb ( null ,false );
+  }
+};
+const upload = multer({
+  storage:storage, 
+  limits: {
+  fileSize: 1024 * 1024 * 5
+},
+fileFilter:fileFilter
+})
 
 // user Register
-router.post('/register', (req, res, next) => {
+router.post('/register', upload.single('hostImage'), (req, res, next) => {
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      userImage:req.file.path
     });
   
     User.addUser(newUser, (err, user) => {

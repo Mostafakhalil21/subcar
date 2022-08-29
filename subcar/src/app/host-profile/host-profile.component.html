@@ -116,42 +116,44 @@
                     </form> -->
                     <form (submit)="OnPostSubmit()">
                         <div class="form-row">
+                            
                           <div class="col-md-4 mb-3">
                             <label for="validationDefault01">Car Type</label>
-                            <input [(ngModel)]="Post.cartype" name="cartype" type="text" class="form-control" id="validationDefault01" placeholder="car type"  required>
+                            <input [(ngModel)]="cartype" name="cartype" type="text" class="form-control" id="validationDefault01" placeholder="car type"  required>
                           </div>
                           <div class="col-md-4 mb-3">
                             <label for="validationDefault02">KMS DRIVEN</label>
-                            <input [(ngModel)]="Post.kms" name="kms" type="text" class="form-control" id="validationDefault02" placeholder="Car KMS"  required>
+                            <input [(ngModel)]="kms" name="kms" type="text" class="form-control" id="validationDefault02" placeholder="Car KMS"  required>
                           </div>
                           <div class="col-md-4 mb-3">
                             <label for="validationDefaultUsername">NO. OF OWNERS</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
                               </div>
-                              <input [(ngModel)]="Post.ownersnumber" name="ownersnumber" type="text" class="form-control" id="validationDefaultUsername" placeholder="NO. OF OWNERS" aria-describedby="inputGroupPrepend2" required>
+                              <input [(ngModel)]="ownersnumber" name="ownersnumber" type="text" class="form-control" id="validationDefaultUsername" placeholder="NO. OF OWNERS" aria-describedby="inputGroupPrepend2" required>
                             </div>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="col-md-6 mb-3">
                             <label for="validationDefault03">Image Link</label>
-                            <input [(ngModel)]="Post.img" name="img" type="text" class="form-control" id="validationDefault03" placeholder="Image Link" required>
+                            <input [(ngModel)]="img" name="img" (change)="selectImage($event)" type="file" class="form-control" id="validationDefault03" placeholder="Image Link" required>
                           </div>
                           <div class="col-md-3 mb-3">
                             <label for="validationDefault04">Color</label>
-                            <input [(ngModel)]="Post.carcolor" name="carcolor" type="text" class="form-control" id="validationDefault04" placeholder="Color" required>
+                            <input [(ngModel)]="carcolor" name="carcolor" type="text" class="form-control" id="validationDefault04" placeholder="Color" required>
                           </div>
                           <div class="col-md-3 mb-3">
                             <label for="validationDefault05">MAKE YEAR</label>
-                            <input [(ngModel)]="Post.caryear" name="caryear" type="text" class="form-control" id="validationDefault05" placeholder="MAKE YEAR" required>
+                            <input [(ngModel)]="caryear" name="caryear" type="text" class="form-control" id="validationDefault05" placeholder="MAKE YEAR" required>
                           </div>
                         </div>
                         <div class="form-group">
                             <label class="sr-only" for="message">post</label>
-                            <textarea [(ngModel)]="Post.desc" name="desc"  class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                            <textarea [(ngModel)]="desc" name="desc"  class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
                             <br>
                         </div>
+                        
                         <button class="btn btn-primary" type="submit">Share</button>
                       </form>
   <br>

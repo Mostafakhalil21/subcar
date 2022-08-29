@@ -7,13 +7,43 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user.model');
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function(req , file , cb) {
+    cb(null , './uploads');
+  },
+  filename:function(req , file , cb) {
+    cb(null , file.originalname)
+  }
+})
+
+
+const fileFilter = (req , file , cb) => {
+  // reject a file 
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+  cb (null , true );
+  }else{
+    cb ( null ,false );
+  }
+};
+const upload = multer({
+  storage:storage, 
+  limits: {
+  fileSize: 1024 * 1024 * 5
+},
+fileFilter:fileFilter
+});
+
 // Host register
-router.post('/register', (req, res, next) => {
+router.post('/register', upload.single('hostImage') , (req, res, next) => {
+  console.log(req.file)
     let newHoste = new Hosting({
       name: req.body.name,
       email: req.body.email,
     businessName :req.body.businessName,
-      password: req.body.password
+      password: req.body.password,
+      businessImg:req.file.path
     });
   
     Hosting.addHost(newHoste, (err, host) => {

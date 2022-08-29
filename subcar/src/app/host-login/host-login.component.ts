@@ -4,6 +4,7 @@ import { FlashMessagesService } from 'flash-messages-angular';
 import { HostAuthService } from '../services/host-auth.service';
 import { ValidateService } from '../services/validate.service';
 import * as $ from 'jquery';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-host-login',
@@ -11,17 +12,18 @@ import * as $ from 'jquery';
   styleUrls: ['./host-login.component.css']
 })
 export class HostLoginComponent implements OnInit {
-  businessName:String;
-  password:String;
-  name:String;
-  email:String;
-  businessImg:String;
+  businessName;
+  password;
+  name;
+  email;
+  businessImg;
   city:String;
   constructor(
     private validateservice:ValidateService ,
     private hostAuth:HostAuthService, 
     private router:Router,
     private flashMessage:FlashMessagesService,
+    private http:HttpClient
 
   ) { }
 
@@ -45,6 +47,18 @@ export class HostLoginComponent implements OnInit {
       });
     });
   }
+
+  // selectImage(event){
+  // if(event.target.files){
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(event.target.files[0]);
+  //   reader.onload=(event:any)=>{
+  //     this.businessImg=event.target.result;
+  //   }
+  // }
+  // }
+
+
 
 
   onLoginSubmit(){
@@ -74,33 +88,45 @@ export class HostLoginComponent implements OnInit {
     })
 
   }
-
+  selectImage(event){
+    this.businessImg = event.target.files[0];
+   
+  }
 
   OnRegisterSubmit(){
-    const host = {
-     name: this.name,
-     email:this.email,
-     businessName:this.businessName,
-     password:this.password,
-     businessImg:this.businessImg,
-     city:this.city
-    }
+    let formdata = new FormData();
+    formdata.set("name" , this.name)
+    formdata.set("email" , this.email)
+    formdata.set("businessName" , this.businessName)
+    formdata.set("password" , this.password)
+    formdata.set("hostImage" , this.businessImg)
+
+  
+  
+    // const host = {
+    //  name: this.name,
+    //  email:this.email,
+    //  businessName:this.businessName,
+    //  password:this.password,
+    //  city:this.city,
+    //  businessImg:this.businessImg,
+    // }
  
     //required fields
-    if(!this.validateservice.validateRegister(host))
+    if(!this.validateservice.validateRegister(formdata))
     {
      this.flashMessage.show("please fill  all fields" , {cssClass: 'alert-danger' , timeout:3000});
      
     }
     // validate Email 
-    if(!this.validateservice.validateEmail(host.email))
+    if(!this.validateservice.validateEmail(formdata.get("email")))
     {
      this.flashMessage.show("please use a valid email", {cssClass: 'alert-danger' , timeout:3000});
      return false;
     }
  
     //Register user
-    this.hostAuth.registerHost(host).subscribe(data =>{
+    this.hostAuth.registerHost(formdata).subscribe(data =>{
      if(data)
      {
        this.flashMessage.show("You are now registered , You can log in", {cssClass: 'alert-success' , timeout:3000});
@@ -112,6 +138,6 @@ export class HostLoginComponent implements OnInit {
        this.router.navigate(['/register'])
      }
     })
-   }
+ }
 
 }

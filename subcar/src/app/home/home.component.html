@@ -27,7 +27,7 @@
   
 <div class="sidebar-container" id="sidebar">
   
- <img src="{{userImage}}" class="avatar">
+ <img src="{{imagePath}}{{userImage}}" class="avatar">
  
   <div class="user-welcomer">
     <br>
@@ -49,9 +49,8 @@
   <div class="sidebar-content">
   <b>Discover More</b>
  <br clear="all">
-  
    <div class="friend_row" *ngFor="let host of hosts">
-  <img src="{{host.businessImg}}" class="avatar friend_avatar">
+  <img src="{{imagePath}}{{host.businessImg}}" class="avatar friend_avatar">
 <div class="online_status active"><i class="fas fa-circle"></i></div>
     <div class="friend_name">{{host.businessName}}</div>
     <div class="flex-end">
@@ -136,18 +135,19 @@ end of left sidebar !-->
 
   
   
-  <!-- <div class="new_status">
+  <div class="new_status">
  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAKlBMVEXg4OD////j4+Pb29v7+/vi4uLx8fHs7Oz39/f09PTa2tru7u7m5ubX19cF3ejnAAABRElEQVR4nO3Z27JDMBiAURFVVN//dXfp+ZC6Y0//tS4zphPflARVBQAAAAAAAAAAAAAAAAAAAAAAAADAj6i/23p6G+jSkn7rKa6tXUyS0mHrSa4rp9QuHNKlJq8yl//i1GS/cEgbtsm4Kx0StEme7ipd4ZCgTQ7zrbT7fOoxm+TL+vL58ondZLwPd/2tQ+wm99HTRu4WJWaTapyTtNdTz/Pe9holaJNcnxrsh+vYZbt/iRK0SVUdj8fnf8k9StgmDyMPD4VzlNBN5qU4Pz0nT1EiN2mmdSe/vDroQzdppsX4NUlKOXCT5ry9f3t3ErhJU3qfFLdJMUncJuUkYZvkchJNNJlo8u58P6l3JXXoPVtRxCZ9PX5Tx/u+4zvgu2H5e3E7LP/MbxmWLowhXBIAAAAAAAAAAAAAAAAAAAAAAAAAgF/1BxZSCIBLTls7AAAAAElFTkSuQmCC" class="avatar" style="height:50px;width:50px;">
     <i class="fas fa-image" style="margin-left:20px;"></i>
     <i class="fas fa-video"></i>
     <i class="fas fa-smile"></i>
     
+    
     <br>
     <textarea placeholder="What's on your mind bud?"></textarea>
 </div>
-   -->
-<!--   
-  <div class="post_container">
+  
+  
+  <!-- <div class="post_container">
  <img src="https://cdn.pixabay.com/photo/2016/02/19/15/46/labrador-retriever-1210559__340.jpg" class="avatar" style="height:50px;width:50px;"> 
     
     <div class="post_content">
@@ -242,7 +242,7 @@ Trip to Woodbine Beach with owner. Lots dirt, mud, rolling. 😂😂😂
     <br>
     <a><Strong>More Info : </Strong><br>{{post.desc}}</a>
     <br><br>
-    <img  src="{{post.img}}" class="border-r">
+    <img  src="{{imagePath}}{{post.img}}" class="border-r">
     
     
     <div  class="reacts">
