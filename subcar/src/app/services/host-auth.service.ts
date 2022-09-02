@@ -14,9 +14,11 @@ export class HostAuthService {
 
 id :any;
   baseURL: string = 'http://localhost:3000/hosts/';
+  anotherbaseurl: string = 'http://localhost:3000/hosts/';
+
   headers = { 'content-type': 'application/json' };
   helper = new JwtHelperService();
-
+private subject = new Subject<String>();
   
   constructor(private http:HttpClient) { }
 
@@ -88,9 +90,24 @@ loggedInn(){
  gethostdetails(hostId){
 this.id=hostId;
  }
-//  sendhostdetails():Observable<any>{
-//   return this.http.get(this.baseURL+ 'gethost/'+`${"62dd2300b2062bc6660ae73d"}`)
 
-// }
+
+sendId(id){
+  this.subject.next(id)
+}
+
+recivedId():Observable<String>{
+return this.subject.asObservable();
+}
+
+
+getallhosts():Observable<any>{
+  return this.http.get(this.baseURL + 'allhosts')
+}
+
+countallhostposts(id){
+  return this.http.get(this.anotherbaseurl + 'countposts/' +`${id}`)
+}
+
 
 }

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { HostAuthService } from '../services/host-auth.service';
 import { PostsService } from '../services/posts.service';
 import { post } from '../models/posts.model';
+import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { PostPopUpComponent } from '../post-pop-up/post-pop-up.component';
+import { EditHostProfileComponent } from '../edit-host-profile/edit-host-profile.component';
 
 
 @Component({
@@ -28,15 +31,22 @@ export class HostProfileComponent implements OnInit {
   carcolor;
   caryear;
   desc;
+
+  closeResult = '';
+
+  imagePath:any='http://localhost:3000/';
+
   constructor(
     private hostAuth:HostAuthService,
     private route:Router,
     private postservice:PostsService,
+    private modealService:NgbModal,
     
     
   ) { }
 
   ngOnInit(): void {
+    
     
 
     this.hostAuth.getProfile().subscribe(profile =>{
@@ -87,5 +97,34 @@ export class HostProfileComponent implements OnInit {
      
     })
  }
+
+
+
+ open() {
+  this.modealService.open(PostPopUpComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
+openEdit() {
+  this.modealService.open(EditHostProfileComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
+
+private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return `with: ${reason}`;
+  }
+}
 
 }

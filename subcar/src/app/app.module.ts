@@ -24,6 +24,13 @@ import { HostAuthGuard } from './guards/hostAuth.guard';
 import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TestComponent } from './test/test.component';
+import { MoreprofiledetailsComponent } from './moreprofiledetails/moreprofiledetails.component';
+import { HostAuthService } from './services/host-auth.service';
+import { PostsService } from './services/posts.service';
+import { UserpostsService } from './services/userposts.service';
+import { EditHostProfileComponent } from './edit-host-profile/edit-host-profile.component';
+import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
 
 
 
@@ -42,6 +49,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HostProfileComponent,
     HostnavbarComponent,
     BusinessProfileComponent,
+    TestComponent,
+    MoreprofiledetailsComponent,
+    EditHostProfileComponent,
+    PostPopUpComponent,
     
   ],
   imports: [
@@ -57,7 +68,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     
     
   ],
-  providers: [ValidateService , AuthService , AuthGuard , HostAuthGuard],
+  providers: [ValidateService , AuthService , AuthGuard , HostAuthGuard ,HostAuthService, HostAuthService ,UserpostsService  , PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

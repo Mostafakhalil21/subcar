@@ -10,6 +10,9 @@ import { HostAuthService } from '../services/host-auth.service';
 import { FlashMessagesComponent, FlashMessagesService } from 'flash-messages-angular';
 import { NgModel } from '@angular/forms';
 import { HostProfileComponent } from '../host-profile/host-profile.component';
+import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { BusinessProfileComponent } from '../business-profile/business-profile.component';
+import { PopupService } from '../services/popup.service';
 
 
 
@@ -47,6 +50,8 @@ imagePath:any='http://localhost:3000/';
     private userpost:UserpostsService,
     private hostAuth:HostAuthService,
     private flashMessage:FlashMessagesService,
+    private modealService:NgbModal,
+    private popupservice:PopupService
   
 
     
@@ -55,6 +60,8 @@ imagePath:any='http://localhost:3000/';
   }
 
   ngOnInit(): void {
+  
+
     this.userpost.refreshNeeded$.subscribe(()=>{
       this.getallposts();
       this.getAllHosts();
@@ -106,7 +113,9 @@ refresh(): void {
 }
 
 sendhostdetails(hostid){
-this.hostAuth.gethostdetails(hostid)
+// this.hostAuth.gethostdetails(hostid)
+this.popupservice.sendId(hostid)
+// this.hostAuth.countallhostposts(hostid);
   console.log(hostid);
 }
 
@@ -124,24 +133,24 @@ likepost(postId){
   this.userpost.likePost(postId).subscribe((data) => {
   })
 }
-// open() {
-//   this.modalService.model.open(HostProfileComponent, {size: 'lg'}).result.then((result) => {
-//     this.closeResult = `Closed with: ${result}`;
-//   }, (reason) => {
-//     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-//   });
-  
-// }
-// private getDismissReason(reason: any): string {
-//   if (reason === ModalDismissReasons.ESC) {
-//     return 'by pressing ESC';
-//   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-//     return 'by clicking on a backdrop';
-//   } else {
-//     return `with: ${reason}`;
-//   }
-// }
 
+open() {
+  this.modealService.open(BusinessProfileComponent, {size: 'xl'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
+private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return `with: ${reason}`;
+  }
+}
 }
 
 

@@ -54,4 +54,8 @@ export class PostsService {
     return this.http.get('http://localhost:3000/posts/posts/'+`${this.id}`)
   }
 
+  getallPosts():Observable<any>{
+    return this.http.get('http://localhost:3000/posts/get/posts')
+  }
+
 }

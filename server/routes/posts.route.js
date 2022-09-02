@@ -63,6 +63,7 @@ router.post("/createpost" , upload.single('hostImage') , async(req,res) =>{
     carcolor:req.body.carcolor,
     caryear:req.body.caryear,
     desc:req.body.desc,
+    price:req.body.price
    
 
   })
@@ -177,6 +178,32 @@ router.get('/newPost/:id', (req, res) => {
       }
   });
 });
+
+
+// coount posts for a spacific host
+
+router.get("/countposts/:id" , async (req, res) =>{
+  try{
+
+    const hostPosts = await Post.find({userId:req.params.id});
+      res.status(200).json(hostPosts.length)
+  }catch(err){
+    
+    res.status(500).json(err);
+  }
+
+})
+
+router.get("/get/posts" , (req,res) =>{
+  Post.find((err , docs) => {
+    if(!err) {
+      res.send(docs);
+    } else {
+      res.send(err);
+    }
+  })
+})
+
 
 
 module.exports = router;

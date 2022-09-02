@@ -52,7 +52,13 @@ const HostingSchema = mongoose.Schema({
     relationship:{
       type:Number,
       enum:[1,2,3]
-    }
+    },
+    phone:{
+      type:String
+    },
+    viewed:{
+      type:Number
+    },
   },
   { timestamps: true }
   );

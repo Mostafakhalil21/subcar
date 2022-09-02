@@ -14,6 +14,10 @@ import { HostProfileComponent } from './host-profile/host-profile.component';
 import { HostAuthGuard } from './guards/hostAuth.guard';
 import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { TestComponent } from './test/test.component';
+import { EditHostProfileComponent } from './edit-host-profile/edit-host-profile.component';
+import { MoreprofiledetailsComponent } from './moreprofiledetails/moreprofiledetails.component';
+import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
 
 const routes: Routes = [
   { path:'',pathMatch:'full',redirectTo:'login'},
@@ -28,7 +32,12 @@ const routes: Routes = [
   { path:'hostdashboard', component:HostDashboardComponent,canActivate:[HostAuthGuard]},
   { path:'hostlogin', component:HostLoginComponent},
   { path:'hostprofile', component:HostProfileComponent ,canActivate:[HostAuthGuard]},
-  { path:'businessprofile', component:BusinessProfileComponent ,canActivate:[HostAuthGuard]},
+  { path:'businessprofile', component:BusinessProfileComponent,canActivate:[HostAuthGuard]},
+  { path:'test', component:TestComponent},
+  {path:'edithostprofile' , component:EditHostProfileComponent,canActivate:[HostAuthGuard]},
+  {path:'moreprofiledetails/:_id' , component:MoreprofiledetailsComponent},
+  {path:'postpopup' , component:PostPopUpComponent,canActivate:[HostAuthGuard]}
+
 
 
 

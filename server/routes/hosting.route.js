@@ -197,7 +197,16 @@ router.get("/gethost/:id" , async (req,res) =>{
   }
 })
 
-    //unfollow a user
+router.get("/allhosts" , (req,res) =>{
+  Hosting.find((err , docs) => {
+    if(!err) {
+      res.send(docs);
+    } else {
+      res.send(err);
+    }
+  })
+})
+
  
 
   module.exports = router;
