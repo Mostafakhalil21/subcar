@@ -36,9 +36,7 @@ export class PostsService {
   // }
   createPost(Post):Observable<any>{
    
-    return this.http.post(this.baseURL + 'createpost' ,Post,{
-  
-    }).pipe(tap(() =>{
+    return this.http.post(this.baseURL + 'createpost' ,Post,{}).pipe(tap(() =>{
       this._refreshNeeded$.next();
     }));
   }

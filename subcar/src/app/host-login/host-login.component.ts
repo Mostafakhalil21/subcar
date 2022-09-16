@@ -17,6 +17,10 @@ export class HostLoginComponent implements OnInit {
   name;
   email;
   businessImg;
+
+  lat;
+  lon;
+
   city:String;
   constructor(
     private validateservice:ValidateService ,
@@ -58,7 +62,19 @@ export class HostLoginComponent implements OnInit {
   // }
   // }
 
+  addLocation(){
+    if(!navigator.geolocation){
+      console.log("location is not supported");
+    }
 
+
+navigator.geolocation.getCurrentPosition((position) => {
+  const coords = position.coords;
+  this.lat=coords.latitude;
+  this.lon=coords.longitude;
+  console.log(coords)
+})
+  }
 
 
   onLoginSubmit(){
@@ -100,6 +116,9 @@ export class HostLoginComponent implements OnInit {
     formdata.set("businessName" , this.businessName)
     formdata.set("password" , this.password)
     formdata.set("hostImage" , this.businessImg)
+    formdata.set("lat" , this.lat)
+    formdata.set("lon" , this.lon)
+
 
   
   

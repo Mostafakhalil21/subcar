@@ -26,7 +26,12 @@ const UserSchema = mongoose.Schema({
   userImage :{
     type:String,
     default:""
-    
+  },
+  lat:{
+    type:Number
+  },
+  lon:{
+    type:Number
   }
 });
 

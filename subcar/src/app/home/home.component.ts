@@ -13,6 +13,7 @@ import { HostProfileComponent } from '../host-profile/host-profile.component';
 import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { BusinessProfileComponent } from '../business-profile/business-profile.component';
 import { PopupService } from '../services/popup.service';
+import { UserChatComponent } from '../user-chat/user-chat.component';
 
 
 
@@ -133,6 +134,13 @@ likepost(postId){
   this.userpost.likePost(postId).subscribe((data) => {
   })
 }
+openMessages(){
+  this.modealService.open(UserChatComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
 
 open() {
   this.modealService.open(BusinessProfileComponent, {size: 'xl'}).result.then((result) => {
@@ -152,5 +160,7 @@ private getDismissReason(reason: any): string {
   }
 }
 }
+
+
 
 

@@ -92,6 +92,8 @@ router.post('/register', upload.single('hostImage'), (req, res, next) => {
               email: user.email,
               following:user.following,
               userImage:user.userImage,
+              lat:user.lat,
+              lon:user.lon
               
               
             }
@@ -173,7 +175,19 @@ router.post('/register', upload.single('hostImage'), (req, res, next) => {
     }
   })
 
+//get all users
 
+router.get("/allusers" , async (req , res) => { 
+  try {
+    const allusers = await User.find();
+    res.status(200).json(allusers);
+
+
+  }catch(err){
+    res.status(500).json(err)
+
+  }
+})
   
   
   module.exports = router;

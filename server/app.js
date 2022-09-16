@@ -25,7 +25,9 @@ mongoose.connection.on('error' , (err) =>{
 
 const users = require('./routes/users.route');
 
-const posts = require('./routes/posts.route')
+const posts = require('./routes/posts.route');
+
+const msg = require('./routes/chat.route');
 
 
 
@@ -78,3 +80,4 @@ app.use('/users', users);
 
 app.use('/hosts',Hosting);
 app.use('/posts',posts);
+app.use('/chat',msg);

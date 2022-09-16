@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   email;
   userImage;
 
+
   constructor(
     private validateservice:ValidateService ,
     private authservice:AuthService,
@@ -53,6 +54,9 @@ export class LoginComponent implements OnInit {
 
 
   }
+
+
+
 
 
   onLoginSubmit(){

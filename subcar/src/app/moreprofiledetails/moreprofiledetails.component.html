@@ -9,12 +9,12 @@
                 <div class="card-body">
                
                     <div class="d-flex align-items-start">
-                        <img src="{{host.businessImg}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                        <img src="{{imagePath}}{{host.businessImg}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                         <div class="w-100 ms-3">
                             <h4 class="my-0">{{host.businessName}}</h4>
                             <p class="text-muted">@{{host.name}}</p>
                             <button style="margin-right: 10px; background-color:#007bff ; color: white;" type="button" class="btn btn-soft-primary btn-xs waves-effect mb-2 waves-light">Follow</button>
-                            <button style="background-color:#007bff ; color: white;" type="button" class="btn btn-soft-success btn-xs waves-effect mb-2 waves-light">Message</button>
+                            <button (click)=" open()" (click)="sendhostdetails(host._id)" style="background-color:#007bff ; color: white;" type="button" class="btn btn-soft-success btn-xs waves-effect mb-2 waves-light">Message</button>
                         </div>
                     </div>
 
@@ -23,7 +23,7 @@
                         <p class="text-muted font-13 mb-3">
                             {{host.desc}}
                             </p>
-                        <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ms-2">Geneva D. McKnight</span></p>
+                        <p class="text-muted mb-2 font-13"><strong>Owner Name :</strong> <span class="ms-2">{{host.name}}</span></p>
                     
                         <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2">{{host.phone}}</span></p>
                     
@@ -70,72 +70,7 @@
                 <div class="card-body">
                     <h4 class="header-title mb-3">Inbox</h4>
 
-                    <div class="inbox-widget" data-simplebar="init" style="max-height: 350px;"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
-                        <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Tomaslau</h5>
-                                <p class="mb-0 font-13">I've finished it! See you so...</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container1">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Stillnotdavid</h5>
-                                <p class="mb-0 font-13">This theme is awesome!</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container1" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container2">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Shahedk</h5>
-                                <p class="mb-0 font-13">Hey! there I'm available...</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container2" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container3">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Kurafire</h5>
-                                <p class="mb-0 font-13">Nice to meet you</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container3" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container4">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Adhamdannaway</h5>
-                                <p class="mb-0 font-13">This theme is awesome!</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container4" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container5">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Tomaslau</h5>
-                                <p class="mb-0 font-13">I've finished it! See you so...</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container5" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center py-1" id="tooltips-container6">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar8.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Shahedk</h5>
-                                <p class="mb-0 font-13">Hey! there I'm available...</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container6" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                        <div class="d-flex align-items-center pt-1" id="tooltips-container7">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                            <div class="w-100 ms-3">
-                                <h5 class="mb-1">Stillnotdavid</h5>
-                                <p class="mb-0 font-13">This theme is awesome!</p>
-                            </div>
-                            <a href="javascript:(0);" class="btn btn-sm btn-soft-info font-13" data-bs-container="#tooltips-container7" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Reply"> <i class="mdi mdi-reply"></i> </a>
-                        </div>
-                    </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 532px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 230px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end inbox-widget -->
+                            <app-map [hero]="host"></app-map>
                 </div>
             </div> <!-- end card-->
             <div class="card">
@@ -305,7 +240,7 @@
                         <a><Strong>More Info : </Strong><br>{{post.desc}}</a>
                         <br><br>
 
-                        <img src="{{post.img}}" alt="post-img" class="rounded me-1" height="300">
+                        <img src="{{imagePath}}{{post.img}}" alt="post-img" class="rounded me-1" height="300">
                         
 
                         <div class="mt-2">

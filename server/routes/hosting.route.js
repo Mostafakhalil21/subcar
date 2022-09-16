@@ -43,7 +43,13 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
       email: req.body.email,
     businessName :req.body.businessName,
       password: req.body.password,
-      businessImg:req.file.path
+      businessImg:req.file.path,
+      // lat:req.body.lat,
+      // lon:req.body.lon,
+      from:req.body.from,
+      city:req.body.city,
+      phone:req.body.phone,
+      desc:req.body.desc
     });
   
     Hosting.addHost(newHoste, (err, host) => {
@@ -94,7 +100,9 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
               email: host.email,
               hostPosts:host.hostPosts,
               businessImg:host.businessImg,
-              follower:host.follower
+              follower:host.follower,
+              lat:host.lat,
+              lon:host.lon
             }
           });
         } 
@@ -142,31 +150,46 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
 
     //update user
 
-    router.put("/:id" ,async (req , res ) => {
-      if(req.body.userId === req.params.id){
-          if(req.body.password){
-            try{
-              const salt = await bcrypt.genSalt(10);
-              req.body.password = await bcrypt.hash(req.body.password , salt);
-            }catch(err){
-                return res.status(403).json(err)
-            }
-          }
-          try{
-            const host = await Hosting.findByIdAndUpdate(req.params.id,{
-              $set:req.body,
-            });
-              res.status(200).json("Account has been updated")
-          }catch(err){
-            return res.status(403).json(err)
+  //   router.put("/:idd" ,async (req , res ) => {
+  //     if(req.body.id === req.params.idd){
+  //         if(req.body.password){
+  //           try{
+  //             const salt = await bcrypt.genSalt(10);
+  //             req.body.password = await bcrypt.hash(req.body.password , salt);
+  //           }catch(err){
+  //               return res.status(403).json(err)
+  //           }
+  //         }
+  //         try{
+  //           var host = {
+  //             businessImg:req.file.path,
+  //             name: req.body.name,
+  //             email: req.body.email,
+  //             businessName :req.body.businessName,
+  //             coverImg:req.body.coverImg,
+  //             city:req.body.city,
+  //             phone:req.body.phone,
+  //             desc:req.body.desc,
+              
 
-          }
-      }else {
-          return res.status(403).json("you can update only your account")
-      }
+  // };
+  // Hosting.findByIdAndUpdate(req.params.id, {$set: host}, {new: true}, (err, doc) => {
+  //   if (!err) {
+  //     res.send(doc);
+  //   } else {
+  //     console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
+  //   }
+  // });
+  //         }catch(err){
+  //           return res.status(403).json(err)
+
+  //         }
+  //     }else {
+  //         return res.status(403).json("you can update only your account")
+  //     }
 
 
-    });
+  //   });
     //delete user
     router.delete("/:id" ,async (req , res ) => {
       if(req.body.userId === req.params.id){
@@ -207,6 +230,30 @@ router.get("/allhosts" , (req,res) =>{
   })
 })
 
+
+router.put('/:id', upload.single('hostImage'), (req, res) => {
+ 
+
+  var host = {
+              businessImg:req.file.path,
+              name: req.body.name,
+              email: req.body.email,
+              businessName :req.body.businessName,
+              from:req.body.from,
+              city:req.body.city,
+              phone:req.body.phone,
+              desc:req.body.desc,
+              
+
+  };
+  Hosting.findByIdAndUpdate(req.params.id, {$set: host}, {new: true}, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
  
 
   module.exports = router;

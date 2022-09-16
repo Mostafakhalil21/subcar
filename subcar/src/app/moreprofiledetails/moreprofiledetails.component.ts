@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HostAuthService } from '../services/host-auth.service';
 import { PopupService } from '../services/popup.service';
+import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ChatComponent } from '../chat/chat.component';
+import { ChatService } from '../services/chat.service';
+
 
 @Component({
   selector: 'app-moreprofiledetails',
@@ -15,12 +19,15 @@ export class MoreprofiledetailsComponent implements OnInit {
   postsArray=[];
   hostPostArray=[];
   counter=0;
-
-
+  closeResult = '';
+  imagePath:any='http://localhost:3000/';
 
   constructor(
     private  actRoute:ActivatedRoute,
-    private popupservice:PopupService
+    private popupservice:PopupService,
+    private modealService:NgbModal,
+    private chatService:ChatService
+
     ) { }
 
   ngOnInit(): void {
@@ -62,6 +69,29 @@ export class MoreprofiledetailsComponent implements OnInit {
       }
     }
   
+  }
+  sendhostdetails(hostid){
+    this.chatService.sendId(hostid)
+      
+    }
+
+
+  open() {
+    this.modealService.open(ChatComponent, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

@@ -31,7 +31,14 @@ import { PostsService } from './services/posts.service';
 import { UserpostsService } from './services/userposts.service';
 import { EditHostProfileComponent } from './edit-host-profile/edit-host-profile.component';
 import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
-
+import { MapComponent } from './map/map.component';
+import { HostMapComponent } from './host-map/host-map.component';
+import { Test2Component } from './test2/test2.component';
+import { ChatComponent } from './chat/chat.component';
+import { HostChatComponent } from './host-chat/host-chat.component';
+import { UserChatComponent } from './user-chat/user-chat.component';
+import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -53,6 +60,14 @@ import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
     MoreprofiledetailsComponent,
     EditHostProfileComponent,
     PostPopUpComponent,
+    MapComponent,
+    HostMapComponent,
+    Test2Component,
+    ChatComponent,
+    HostChatComponent,
+    UserChatComponent,
+    FooterComponent,
+    AboutComponent,
     
   ],
   imports: [
@@ -62,6 +77,7 @@ import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
     HttpClientModule,
     NgbModule,
     FlashMessagesModule.forRoot(),
+    ReactiveFormsModule
     
 
    

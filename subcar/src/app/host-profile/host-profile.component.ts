@@ -6,6 +6,8 @@ import { post } from '../models/posts.model';
 import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PostPopUpComponent } from '../post-pop-up/post-pop-up.component';
 import { EditHostProfileComponent } from '../edit-host-profile/edit-host-profile.component';
+import { HostChatComponent } from '../host-chat/host-chat.component';
+import { HostChatService } from '../services/host-chat.service';
 
 
 @Component({
@@ -36,6 +38,16 @@ export class HostProfileComponent implements OnInit {
 
   imagePath:any='http://localhost:3000/';
 
+
+
+  postsArray=[];
+  hostPostArray=[];
+  counter=0;
+
+
+
+
+
   constructor(
     private hostAuth:HostAuthService,
     private route:Router,
@@ -46,9 +58,11 @@ export class HostProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    
 
+
+
+
+    
     this.hostAuth.getProfile().subscribe(profile =>{
       this.host=profile.user;
       console.log(profile.user)
@@ -64,6 +78,12 @@ export class HostProfileComponent implements OnInit {
     this.getallposts();
 
   }
+
+
+  // ------------------- //
+
+
+
   selectImage(event){
     this.img = event.target.files[0];
    
@@ -75,7 +95,16 @@ export class HostProfileComponent implements OnInit {
     let flatData=data.flat();
     flatData.reverse();
     this.post=flatData;
+    this.postsArray=flatData;
+    this.searchposts();
   })
+  }
+
+  searchposts(){
+    for(let i of this.postsArray){
+         this.counter+=i.likes.length; 
+    }
+  
   }
 
   OnPostSubmit(){
@@ -127,4 +156,15 @@ private getDismissReason(reason: any): string {
   }
 }
 
+openMessages(){
+  this.modealService.open(HostChatComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
 }
+
+}
+
+
+

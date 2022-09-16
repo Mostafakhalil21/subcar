@@ -59,6 +59,12 @@ const HostingSchema = mongoose.Schema({
     viewed:{
       type:Number
     },
+    lat:{
+      type:Number
+    },
+    lon:{
+      type:Number
+    }
   },
   { timestamps: true }
   );

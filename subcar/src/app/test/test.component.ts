@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-test',
@@ -7,46 +9,35 @@ import * as $ from 'jquery';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+  closeResult = '';
 
-  constructor() { }
+  constructor(    private modealService:NgbModal,
+    ) { }
 
   ngOnInit(): void {
 
    
 
-      $(".sidebar-dropdown > a").click(function() {
-    $(".sidebar-submenu").slideUp(200);
-    if (
-      $(this)
-        .parent()
-        .hasClass("active")
-    ) {
-      $(".sidebar-dropdown").removeClass("active");
-      $(this)
-        .parent()
-        .removeClass("active");
-    } else {
-      $(".sidebar-dropdown").removeClass("active");
-      $(this)
-        .next(".sidebar-submenu")
-        .slideDown(200);
-      $(this)
-        .parent()
-        .addClass("active");
-    }
-  });
-  
-  $("#close-sidebar").click(function() {
-    $(".page-wrapper").removeClass("toggled");
-  });
-  $("#show-sidebar").click(function() {
-    $(".page-wrapper").addClass("toggled");
-  });
-  
-  
      
 }
  
+  
+
+open() {
+  this.modealService.open(RegisterComponent, {size: 'xl'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
-
-
+}

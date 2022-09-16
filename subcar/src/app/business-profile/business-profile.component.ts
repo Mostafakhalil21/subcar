@@ -16,6 +16,8 @@ export class BusinessProfileComponent implements OnInit {
   counter=0;
   postsArray=[];
   hostPostArray=[];
+  
+  imagePath:any='http://localhost:3000/';
   constructor(
     private popupservice:PopupService,
     
@@ -28,6 +30,7 @@ export class BusinessProfileComponent implements OnInit {
     this.popupservice.recivedId().subscribe((data)=>{
       this.message=data;
     })
+   
   }
 
 
