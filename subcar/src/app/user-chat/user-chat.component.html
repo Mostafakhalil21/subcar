@@ -14,11 +14,10 @@
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0" >
-                    <li class="clearfix" *ngFor="let i of MyContentArray">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                    <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix" *ngFor="let i of newHostsArray">
+                        <img  src="{{imagePath}}{{i.businessImg}}" alt="avatar">
                         <div class="about">
-                            <div (click)="sendUserdetails(i)" (click)="getsendermessages(i)"  class="name">{{i}}</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>                                            
+                            <div   class="name">{{i.businessName}}</div>
                         </div>
                     </li>
                     
@@ -34,7 +33,6 @@
                             </a>
                             <div class="chat-about">
                                 <h6 class="m-b-0">Aiden Chavez</h6>
-                                <small>Last seen: 2 hours ago</small>
                             </div>
                         </div>
                    

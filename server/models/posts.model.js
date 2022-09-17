@@ -45,6 +45,9 @@ const postSchema = new mongoose.Schema(
     viewed:{
       type:Number,
     },
+    price:{
+      type:String,
+    }
   },
   { timestamps: true }
 );

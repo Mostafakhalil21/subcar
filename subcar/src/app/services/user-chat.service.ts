@@ -15,6 +15,8 @@ export class UserChatService {
   data = JSON.parse(this.key)
   id= this.data[Object.keys(this.data)[0]]
 
+  baseURL: string = 'http://localhost:3000/hosts/';
+
   messageUrl:String = 'http://localhost:3000/chat/';
   headers = { 'content-type': 'application/json' };
   
@@ -45,6 +47,10 @@ export class UserChatService {
     return this.http.post(this.messageUrl + 'msg', message).pipe(tap(() =>{
       this._refreshNeeded$.next();
     }));
+    }
+
+    getAllHosts(){
+      return this.http.get(this.baseURL +'allhosts')
     }
 
 }

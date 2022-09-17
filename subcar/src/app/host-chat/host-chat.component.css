@@ -254,3 +254,11 @@ body{
         overflow-x: auto
     }
 }
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}

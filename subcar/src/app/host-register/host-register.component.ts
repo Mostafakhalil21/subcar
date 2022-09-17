@@ -5,6 +5,7 @@ import { FlashMessagesService } from 'flash-messages-angular';
 import { HostAuthService } from '../services/host-auth.service';
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
+import { HostRegisterService } from '../services/host-register.service';
 @Component({
   selector: 'app-host-register',
   templateUrl: './host-register.component.html',
@@ -22,13 +23,12 @@ export class HostRegisterComponent implements OnInit {
   city;
   from
 
-  lat;
-  lon;
+ 
 
   constructor(
     private validateservice:ValidateService ,
     private flashMessage:FlashMessagesService,
-    private hostAuth:HostAuthService,
+    private hostregisterService:HostRegisterService,
     private router:Router,
     private http:HttpClient
   ) { }
@@ -36,19 +36,8 @@ export class HostRegisterComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  addLocation(){
-    if(!navigator.geolocation){
-      console.log("location is not supported");
-    }
+  
 
-
-navigator.geolocation.getCurrentPosition((position) => {
-  const coords = position.coords;
-  this.lat=coords.latitude;
-  this.lon=coords.longitude;
-  console.log(coords)
-})
-  }
 
   selectImage(event){
     this.businessImg = event.target.files[0];
@@ -61,8 +50,7 @@ navigator.geolocation.getCurrentPosition((position) => {
     formdata.set("businessName" , this.businessName)
     formdata.set("password" , this.password)
     formdata.set("hostImage" , this.businessImg)
-    // formdata.set("lat" , this.lat)
-    // formdata.set("lon" , this.lon)
+   
     formdata.set("from" , this.from)
     formdata.set("city" , this.city)
     formdata.set("phone" , this.phone)
@@ -85,16 +73,17 @@ navigator.geolocation.getCurrentPosition((position) => {
     }
  
     //Register user
-    this.hostAuth.registerHost(formdata).subscribe(data =>{
+    this.hostregisterService.registerHost(formdata).subscribe(data =>{
      if(data)
      {
        this.flashMessage.show("You are now registered , You can log in", {cssClass: 'alert-success' , timeout:3000});
        this.router.navigate(['/hostlogin'])
+       
      }
      else
      {
        this.flashMessage.show("Something went wrong", {cssClass: 'alert-danger' , timeout:3000});
-       this.router.navigate(['/register'])
+       this.router.navigate(['/about'])
      }
     })
  }

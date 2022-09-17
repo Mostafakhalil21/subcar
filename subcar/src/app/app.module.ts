@@ -39,6 +39,7 @@ import { HostChatComponent } from './host-chat/host-chat.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
+import { UserMapComponent } from './user-map/user-map.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { AboutComponent } from './about/about.component';
     UserChatComponent,
     FooterComponent,
     AboutComponent,
+    UserMapComponent,
     
   ],
   imports: [
@@ -77,7 +79,8 @@ import { AboutComponent } from './about/about.component';
     HttpClientModule,
     NgbModule,
     FlashMessagesModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
     
 
    

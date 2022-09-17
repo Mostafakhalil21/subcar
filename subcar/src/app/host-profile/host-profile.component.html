@@ -4,7 +4,7 @@
 
   
   <app-hostnavbar></app-hostnavbar>
-  
+  <flash-messages></flash-messages>
 
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
@@ -42,15 +42,8 @@
                     </div>                                    
 
                     <ul class="social-list list-inline mt-3 mb-0">
-                        <li class="list-inline-item">
-                            <a href="javascript: void(0);" class="social-list-item text-center border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="javascript: void(0);" class="social-list-item text-center border-danger text-danger"><i class="mdi mdi-google"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="javascript: void(0);" class="social-list-item text-center border-info text-info"><i class="mdi mdi-twitter"></i></a>
-                        </li>
+                        <button  (click)="addLocation()" type="button" style="background-color: #007bff; color:white;"  class="btn btn-soft-primary btn-xs waves-effect mb-2 waves-light">Add your business on map</button>
+
                       
                     </ul>   
                 </div>                                 
@@ -78,64 +71,15 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mb-3">Inbox</h4>
+                    <h4 class="header-title mb-3">My Location</h4>
 
                     
                     <app-host-map></app-host-map>
                 </div>
             </div> <!-- end card-->
-            <div class="card" >
-                <div class="card-body">
-                
+          
 
-                    <h4 class="header-title mb-3">Team Members <i class="mdi mdi-account-multiple ms-1"></i></h4>
-
-                    <div class="list-group" style="overflow: scroll; width: 100%; height: 300px;">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Herbert Stewart<i class="mdi mdi-check-decagram text-info ms-1"></i></h5>
-                                    <p class="mb-0 font-13 text-muted">Co Founder</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Terry Mouser</h5>
-                                    <p class="mb-0 font-13 text-muted">Web Designer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Adam Barney</h5>
-                                    <p class="mb-0 font-13 text-muted">PHP Developer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Michal Chang</h5>
-                                    <p class="mb-0 font-13 text-muted">UI/UX Designer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-body">
               
 
@@ -220,7 +164,7 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div> <!-- end col-->
 
         <div class="col-xl-7">
@@ -232,7 +176,7 @@
                     <!-- Story Box-->
                     <div class="border border-light p-2 mb-3" *ngFor="let post of post" >
                         <div class="d-flex align-items-start">
-                            <img class="me-2 avatar-sm rounded-circle" src="{{post.businessImg}}" >
+                            <img class="me-2 avatar-sm rounded-circle" src="{{imagePath}}{{post.businessImg}}" >
                             <div class="w-100">
                                 <Strong>{{post.hostName}}</Strong> posted
                                 <p class="text-muted"><small>{{post.createdAt | date:'mediumDate'}}</small></p>
@@ -247,6 +191,8 @@
                         <a><Strong>Car Color : </Strong>{{post.carcolor}}</a>
                         <br>
                         <a><Strong>Car Year : </Strong>{{post.caryear}}</a>
+                        <br>
+                        <a><Strong>Price : </Strong>₪ {{post.price}}</a>
                         <br>
                         <a><Strong>More Info : </Strong><br>{{post.desc}}</a>
                         <br><br>

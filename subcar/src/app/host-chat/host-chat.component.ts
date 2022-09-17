@@ -8,12 +8,16 @@ import { HostChatService } from '../services/host-chat.service';
 })
 export class HostChatComponent implements OnInit {
 
+  
   message;
   receiverId;
  arraycontent:any=[]
  usersArray:any=[];
  filteredUsersArray:any=[]
- array:any=[];
+
+ imagePath:any='http://localhost:3000/';
+
+ newUsersArray:any=[]
  key =  localStorage.getItem("host")
  data = JSON.parse(this.key)
  id= this.data[Object.keys(this.data)[0]]
@@ -27,40 +31,45 @@ export class HostChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.filterUsers();
+    this.hostchatService.recivedId().subscribe((data)=>{
+      this.receiverId=data;
+      
+      
+    })
   this.getallusers();
-
 this.getallMessagesForHost();
-console.log(this.MyContentArray)
-console.log(this.messagesArray)
-console.log(this.filteredUsersArray.length)
+console.log(this.newUsersArray)
 
-this.hostchatService.recivedId().subscribe((data)=>{
-  this.receiverId=data;
-  console.log(this.receiverId)
-})
+
+
 
   }
 
   getallusers(){
     this.hostchatService.getallUsers().subscribe((data) => {
       this.usersArray=data;
-      this.swap();
-      
+ 
+      for(let i  of this.usersArray){
+        for(let j = 0 ; j<this.MyContentArray.length;j++){
+            if(i._id==this.MyContentArray[j]){
+          this.newUsersArray.push(i)
+        }
+    
+        }
+     
+      }
+
     })
+  
   }
 
-  swap(){
-    for(let i of this.usersArray){
-      this.array.push(i)
-    }
-   
-  }
 
   getallMessagesForHost(){
     this.hostchatService.getAllMessagesForAHost().subscribe(messages => {
       this.contentMessagesArray=messages;
       this.searchSenders();
+      this.getallusers();
+     
     })
   }
   searchSenders(){
@@ -76,19 +85,14 @@ this.hostchatService.recivedId().subscribe((data)=>{
       }
     }
     this.MyContentArray.reverse();
+    
   }
   
 
-  filterUsers(){
-for(let i=0 ;i <this.array.length;i++){
 
-   this.filteredUsersArray.push("hi")
-
-}
-   
-  } 
   sendUserdetails(hostid){
     this.hostchatService.sendId(hostid)
+ 
     
       
     }

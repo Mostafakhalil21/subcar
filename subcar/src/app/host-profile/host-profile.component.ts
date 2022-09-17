@@ -8,6 +8,8 @@ import { PostPopUpComponent } from '../post-pop-up/post-pop-up.component';
 import { EditHostProfileComponent } from '../edit-host-profile/edit-host-profile.component';
 import { HostChatComponent } from '../host-chat/host-chat.component';
 import { HostChatService } from '../services/host-chat.service';
+import { FlashMessagesService } from 'flash-messages-angular';
+import { LatlonService } from '../services/latlon.service';
 
 
 @Component({
@@ -33,7 +35,8 @@ export class HostProfileComponent implements OnInit {
   carcolor;
   caryear;
   desc;
-
+  lat;
+  lon;
   closeResult = '';
 
   imagePath:any='http://localhost:3000/';
@@ -53,12 +56,13 @@ export class HostProfileComponent implements OnInit {
     private route:Router,
     private postservice:PostsService,
     private modealService:NgbModal,
+    private flashMessage:FlashMessagesService,
+    private latlonService:LatlonService
     
     
   ) { }
 
   ngOnInit(): void {
-
 
 
 
@@ -81,7 +85,34 @@ export class HostProfileComponent implements OnInit {
 
 
   // ------------------- //
+  addLocation(){
+    if(!navigator.geolocation){
+      console.log("location is not supported");
+    }
 
+
+navigator.geolocation.getCurrentPosition((position) => {
+  const coords = position.coords;
+  this.lat=coords.latitude;
+  this.lon=coords.longitude;
+  console.log(coords)
+
+  const lonlat = {
+    lat:this.lat,
+    lon:this.lon
+  }
+
+  this.latlonService.updatelatlon(lonlat).subscribe(data => {
+    if(data){
+      this.flashMessage.show("You have successfuly added your business on map", {cssClass: 'alert-success' , timeout:3000});
+
+    }  else
+    {
+      this.flashMessage.show("Something went wrong", {cssClass: 'alert-danger' , timeout:3000});
+    }
+  })
+})
+  }
 
 
   selectImage(event){

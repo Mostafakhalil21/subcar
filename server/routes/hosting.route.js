@@ -44,8 +44,6 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
     businessName :req.body.businessName,
       password: req.body.password,
       businessImg:req.file.path,
-      // lat:req.body.lat,
-      // lon:req.body.lon,
       from:req.body.from,
       city:req.body.city,
       phone:req.body.phone,
@@ -247,6 +245,24 @@ router.put('/:id', upload.single('hostImage'), (req, res) => {
 
   };
   Hosting.findByIdAndUpdate(req.params.id, {$set: host}, {new: true}, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
+router.put('/updatelatlon/:id', (req, res) => {
+ 
+
+  var location = {
+              lat:req.body.lat,
+              lon:req.body.lon
+              
+
+  };
+  Hosting.findByIdAndUpdate(req.params.id, {$set: location},  (err, doc) => {
     if (!err) {
       res.send(doc);
     } else {

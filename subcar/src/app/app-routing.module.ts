@@ -25,9 +25,10 @@ import { ChatComponent } from './chat/chat.component';
 import { HostChatComponent } from './host-chat/host-chat.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { AboutComponent } from './about/about.component';
+import { UserMapComponent } from './user-map/user-map.component';
 
 const routes: Routes = [
-  { path:'',pathMatch:'full',redirectTo:'login'},
+  { path:'',pathMatch:'full',redirectTo:'about'},
   { path:'login', component:LoginComponent},
   { path:'register', component:RegisterComponent},
   { path:'home', component:HomeComponent,canActivate:[AuthGuard] },
@@ -50,6 +51,8 @@ const routes: Routes = [
   {path:'chat' , component:ChatComponent},
   {path:'hostchat' , component:HostChatComponent},
   {path:'userchat' , component:UserChatComponent},
+  {path:'usermap' , component:UserMapComponent},
+
 
 
 

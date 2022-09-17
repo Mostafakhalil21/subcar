@@ -12,6 +12,9 @@ export class HostAuthService {
   authToken :any ;
   host:any;
 
+
+
+  
 id :any;
   baseURL: string = 'http://localhost:3000/hosts/';
   anotherbaseurl: string = 'http://localhost:3000/hosts/';
@@ -108,6 +111,8 @@ getallhosts():Observable<any>{
 countallhostposts(id){
   return this.http.get(this.anotherbaseurl + 'countposts/' +`${id}`)
 }
+
+
 
 
 }

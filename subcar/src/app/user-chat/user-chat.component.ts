@@ -15,6 +15,10 @@ export class UserChatComponent implements OnInit {
   receiverId;
   contentMessagesArray:any=[];
  MyContentArray:any=[];
+
+ newHostsArray:any=[]
+HostsArray:any=[];
+ imagePath:any='http://localhost:3000/';
   
   
   constructor(
@@ -22,26 +26,39 @@ export class UserChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
-    this.userchatService.refreshNeeded$.subscribe(()=>{
-      this.getallMessagesForHost();
-      this.searchSenders();
-      
-      
-    });
+     
     this.userchatService.recivedId().subscribe((data)=>{
       this.receiverId=data;
       console.log(this.receiverId)
     })
-    
+    this.getallHosts();
     this.getallMessagesForHost();
 
   }
+
+  getallHosts(){
+    this.userchatService.getAllHosts().subscribe((data) => {
+      this.HostsArray=data;
+ 
+      for(let i  of this.HostsArray){
+        for(let j = 0 ; j<this.MyContentArray.length;j++){
+            if(i._id==this.MyContentArray[j]){
+          this.newHostsArray.push(i)
+        }
+    
+        }
+     
+      }
+
+    })
+  
+  }
+
   getallMessagesForHost(){
     this.userchatService.getAllMessagesForAHost().subscribe(messages => {
       this.contentMessagesArray=messages;
       this.searchSenders();
+      this.getallHosts();
     })
   }
 

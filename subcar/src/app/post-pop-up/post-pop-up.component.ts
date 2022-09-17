@@ -52,6 +52,7 @@ export class PostPopUpComponent implements OnInit {
 
     this.postservice.createPost(formdata).subscribe(res => {
      console.log("works")
+     window.location.reload()
      
     })
  }
