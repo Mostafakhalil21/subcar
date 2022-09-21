@@ -41,6 +41,7 @@ export class HostProfileComponent implements OnInit {
 
   imagePath:any='http://localhost:3000/';
 
+  public searchFilter: any = '';
 
 
   postsArray=[];
@@ -85,6 +86,11 @@ export class HostProfileComponent implements OnInit {
 
 
   // ------------------- //
+
+  addItem(newItem: string) {
+    this.searchFilter=newItem;
+  }
+
   addLocation(){
     if(!navigator.geolocation){
       console.log("location is not supported");
@@ -127,11 +133,11 @@ navigator.geolocation.getCurrentPosition((position) => {
     flatData.reverse();
     this.post=flatData;
     this.postsArray=flatData;
-    this.searchposts();
+    this.countposts();
   })
   }
 
-  searchposts(){
+  countposts(){
     for(let i of this.postsArray){
          this.counter+=i.likes.length; 
     }

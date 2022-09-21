@@ -6,8 +6,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileComponent } from './profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidateService } from './services/validate.service';
 import { FlashMessagesModule } from 'flash-messages-angular';
@@ -16,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './guards/auth.guard';
-import { HostDashboardComponent } from './host-dashboard/host-dashboard.component';
 import { HostLoginComponent } from './host-login/host-login.component';
 import { HostRegisterComponent } from './host-register/host-register.component';
 import { HostProfileComponent } from './host-profile/host-profile.component';
@@ -24,7 +21,6 @@ import { HostAuthGuard } from './guards/hostAuth.guard';
 import { HostnavbarComponent } from './hostnavbar/hostnavbar.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TestComponent } from './test/test.component';
 import { MoreprofiledetailsComponent } from './moreprofiledetails/moreprofiledetails.component';
 import { HostAuthService } from './services/host-auth.service';
 import { PostsService } from './services/posts.service';
@@ -33,13 +29,13 @@ import { EditHostProfileComponent } from './edit-host-profile/edit-host-profile.
 import { PostPopUpComponent } from './post-pop-up/post-pop-up.component';
 import { MapComponent } from './map/map.component';
 import { HostMapComponent } from './host-map/host-map.component';
-import { Test2Component } from './test2/test2.component';
 import { ChatComponent } from './chat/chat.component';
 import { HostChatComponent } from './host-chat/host-chat.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { UserMapComponent } from './user-map/user-map.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 
 @NgModule({
@@ -49,27 +45,23 @@ import { UserMapComponent } from './user-map/user-map.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DashboardComponent,
-    ProfileComponent,
-    HostDashboardComponent,
     HostLoginComponent,
     HostRegisterComponent,
     HostProfileComponent,
     HostnavbarComponent,
     BusinessProfileComponent,
-    TestComponent,
     MoreprofiledetailsComponent,
     EditHostProfileComponent,
     PostPopUpComponent,
     MapComponent,
     HostMapComponent,
-    Test2Component,
     ChatComponent,
     HostChatComponent,
     UserChatComponent,
     FooterComponent,
     AboutComponent,
     UserMapComponent,
+    SearchFilterPipe,
     
   ],
   imports: [

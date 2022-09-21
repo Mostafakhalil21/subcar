@@ -32,35 +32,10 @@ export class HostLoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    $(document).ready(function(){
-      $('#goRight').on('click', function(){
-        $('#slideBox').animate({
-          'marginLeft' : '0'
-        });
-        $('.topLayer').animate({
-          'marginLeft' : '100%'
-        });
-      });
-      $('#goLeft').on('click', function(){
-        $('#slideBox').animate({
-          'marginLeft' : '50%'
-        });
-        $('.topLayer').animate({
-          'marginLeft': '0'
-        });
-      });
-    });
+
   }
 
-  // selectImage(event){
-  // if(event.target.files){
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(event.target.files[0]);
-  //   reader.onload=(event:any)=>{
-  //     this.businessImg=event.target.result;
-  //   }
-  // }
-  // }
+
 
   addLocation(){
     if(!navigator.geolocation){

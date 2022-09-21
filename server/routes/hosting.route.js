@@ -145,49 +145,6 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
   
     // -------------------------------- CRUD ------------------------------
 
-
-    //update user
-
-  //   router.put("/:idd" ,async (req , res ) => {
-  //     if(req.body.id === req.params.idd){
-  //         if(req.body.password){
-  //           try{
-  //             const salt = await bcrypt.genSalt(10);
-  //             req.body.password = await bcrypt.hash(req.body.password , salt);
-  //           }catch(err){
-  //               return res.status(403).json(err)
-  //           }
-  //         }
-  //         try{
-  //           var host = {
-  //             businessImg:req.file.path,
-  //             name: req.body.name,
-  //             email: req.body.email,
-  //             businessName :req.body.businessName,
-  //             coverImg:req.body.coverImg,
-  //             city:req.body.city,
-  //             phone:req.body.phone,
-  //             desc:req.body.desc,
-              
-
-  // };
-  // Hosting.findByIdAndUpdate(req.params.id, {$set: host}, {new: true}, (err, doc) => {
-  //   if (!err) {
-  //     res.send(doc);
-  //   } else {
-  //     console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
-  //   }
-  // });
-  //         }catch(err){
-  //           return res.status(403).json(err)
-
-  //         }
-  //     }else {
-  //         return res.status(403).json("you can update only your account")
-  //     }
-
-
-  //   });
     //delete user
     router.delete("/:id" ,async (req , res ) => {
       if(req.body.userId === req.params.id){

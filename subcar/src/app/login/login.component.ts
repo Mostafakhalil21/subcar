@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   email;
   userImage;
 
-
   constructor(
     private validateservice:ValidateService ,
     private authservice:AuthService,
@@ -31,17 +30,8 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
-
   }
-
-
-
-
-
   onLoginSubmit(){
-
-  
     const user = {
       username :this.username,
       password:this.password

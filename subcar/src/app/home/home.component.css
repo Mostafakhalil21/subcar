@@ -33,7 +33,7 @@
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
 }
 .avatar-sm {
     height: 2.25rem;

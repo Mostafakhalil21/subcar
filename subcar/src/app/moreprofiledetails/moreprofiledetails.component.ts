@@ -21,6 +21,9 @@ export class MoreprofiledetailsComponent implements OnInit {
   counter=0;
   closeResult = '';
   imagePath:any='http://localhost:3000/';
+  key =  localStorage.getItem("user")
+  data = JSON.parse(this.key)
+  followingg = this.data[Object.keys(this.data)[4]]
 
   constructor(
     private  actRoute:ActivatedRoute,
@@ -49,6 +52,15 @@ export class MoreprofiledetailsComponent implements OnInit {
         this.host=i;
       }
     }
+  }
+
+  checkIfFollowing(id){
+    for(let i of this.followingg){
+      if(i==id){
+        return true
+      }
+    }
+    return false
   }
 
  

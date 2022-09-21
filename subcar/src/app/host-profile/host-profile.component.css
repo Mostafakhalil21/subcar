@@ -20,6 +20,7 @@
     border: 0 solid #ecf2f5;
     border-radius: .25rem;
 }
+
 .avatar-lg {
     height: 4.5rem;
     width: 4.5rem;
@@ -33,7 +34,14 @@
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 100%;
+    /* height: auto; */
+}
+.responsive {
+    width: 100%;
     height: auto;
+  }
+  img.rounded.me-1 {
+    width: auto;
 }
 .avatar-sm {
     height: 2.25rem;

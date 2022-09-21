@@ -20,7 +20,11 @@ export class UserChatComponent implements OnInit {
 HostsArray:any=[];
  imagePath:any='http://localhost:3000/';
   
-  
+img;
+hostBusinessName;
+ hostdetails;
+ public searchFilter: any = '';
+
   constructor(
     private userchatService:UserChatService
   ) { }
@@ -29,8 +33,16 @@ HostsArray:any=[];
      
     this.userchatService.recivedId().subscribe((data)=>{
       this.receiverId=data;
-      console.log(this.receiverId)
+      for(let i of this.newHostsArray){
+        if(i._id == this.receiverId){
+        this.hostdetails=i;
+        this.img=this.hostdetails.businessImg
+        this.hostBusinessName=this.hostdetails.businessName;
+        }
+      }
     })
+
+    
     this.getallHosts();
     this.getallMessagesForHost();
 

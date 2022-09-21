@@ -33,18 +33,12 @@ export class HostChatComponent implements OnInit {
   ngOnInit(): void {
     this.hostchatService.recivedId().subscribe((data)=>{
       this.receiverId=data;
-      
-      
     })
   this.getallusers();
 this.getallMessagesForHost();
 console.log(this.newUsersArray)
 
-
-
-
   }
-
   getallusers(){
     this.hostchatService.getallUsers().subscribe((data) => {
       this.usersArray=data;
@@ -62,7 +56,6 @@ console.log(this.newUsersArray)
     })
   
   }
-
 
   getallMessagesForHost(){
     this.hostchatService.getAllMessagesForAHost().subscribe(messages => {
@@ -88,13 +81,8 @@ console.log(this.newUsersArray)
     
   }
   
-
-
   sendUserdetails(hostid){
-    this.hostchatService.sendId(hostid)
- 
-    
-      
+    this.hostchatService.sendId(hostid) 
     }
 
   getsendermessages(id){

@@ -37,18 +37,6 @@ fileFilter:fileFilter
 
 
 
-// //Storage 
-// const Storage = multer.diskStorage({
-//   destination:'uploads' ,
-//   filename:(req,file,cb) => {
-//     cb(null , file.originalname);
-//   },
-// })
-
-// const upload = multer({
-//   storage:Storage
-// }).single('testImage')
-
 
 // create a post
 router.post("/createpost" , upload.single('hostImage') , async(req,res) =>{

@@ -13,7 +13,8 @@
                         <div class="w-100 ms-3">
                             <h4 class="my-0">{{host.businessName}}</h4>
                             <p class="text-muted">@{{host.name}}</p>
-                            <button style="margin-right: 10px; background-color:#007bff ; color: white;" type="button" class="btn btn-soft-primary btn-xs waves-effect mb-2 waves-light">Follow</button>
+                            <button *ngIf="checkIfFollowing(host._id)" style="margin-right: 10px; background-color:#007bff ; color: white;" type="button" class="btn btn-soft-primary btn-xs waves-effect mb-2 waves-light">Unfollow</button>
+                            <button *ngIf="!checkIfFollowing(host._id)" style="margin-right: 10px; background-color:#007bff ; color: white;" type="button" class="btn btn-soft-primary btn-xs waves-effect mb-2 waves-light">Follow</button>
                             <button (click)=" open()" (click)="sendhostdetails(host._id)" style="background-color:#007bff ; color: white;" type="button" class="btn btn-soft-success btn-xs waves-effect mb-2 waves-light">Message</button>
                         </div>
                     </div>
@@ -23,7 +24,7 @@
                         <p class="text-muted font-13 mb-3">
                             {{host.desc}}
                             </p>
-                        <p class="text-muted mb-2 font-13"><strong>Owner Name :</strong> <span class="ms-2">{{host.name}}</span></p>
+                        <p class="text-muted mb-2 font-13"><strong>Name :</strong> <span class="ms-2">{{host.name}}</span></p>
                     
                         <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2">{{host.phone}}</span></p>
                     
@@ -68,148 +69,12 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mb-3">Inbox</h4>
+                    <h4 class="header-title mb-3">Host Location <span class="mdi mdi-map-marker-multiple"></span></h4>
 
                             <app-map [hero]="host"></app-map>
                 </div>
             </div> <!-- end card-->
-            <!-- <div class="card">
-                <div class="card-body">
-                
-
-                    <h4 class="header-title mb-3">Team Members <i class="mdi mdi-account-multiple ms-1"></i></h4>
-
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Herbert Stewart<i class="mdi mdi-check-decagram text-info ms-1"></i></h5>
-                                    <p class="mb-0 font-13 text-muted">Co Founder</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Terry Mouser</h5>
-                                    <p class="mb-0 font-13 text-muted">Web Designer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Adam Barney</h5>
-                                    <p class="mb-0 font-13 text-muted">PHP Developer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center pb-1" id="tooltips-container">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-fluid avatar-md img-thumbnail bg-transparent" alt="">
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1">Michal Chang</h5>
-                                    <p class="mb-0 font-13 text-muted">UI/UX Designer</p>
-                                </div>
-                                <i class="mdi mdi-chevron-right h2"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-              
-
-                    <h4 class="header-title mb-3">Upcoming Reminders <i class="mdi mdi-adjust ms-1"></i></h4>
-
-                    <div class="list-group">
-                        <a href="#" class="my-1">
-                            <div class="d-flex align-items-start" id="tooltips-container">
-                                <div class="">
-                                    <i class="mdi mdi-circle h3 text-primary"></i>
-                                </div>
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1 mt-0">New Admin Layout Discuss</h5>
-                                    <ul class="list-inline text-muted font-12">
-                                        <li class="list-inline-item"><i class="mdi mdi-calendar-blank-outline me-1"></i>10 May 2021</li>
-                                        <li class="list-inline-item"> - </li>
-                                        <li class="list-inline-item"><i class="mdi mdi-clock-time-eight-outline me-1"></i>09:00am <span class="px-1">To</span> 10:30am</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="my-1">
-                            <div class="d-flex align-items-start" id="tooltips-container">
-                                <div class="">
-                                    <i class="mdi mdi-circle h3 text-pink"></i>
-                                </div>
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1 mt-0">Landing Pages Planning</h5>
-                                    <ul class="list-inline text-muted font-12">
-                                        <li class="list-inline-item"><i class="mdi mdi-calendar-blank-outline me-1"></i>10 May 2021</li>
-                                        <li class="list-inline-item"> - </li>
-                                        <li class="list-inline-item"><i class="mdi mdi-clock-time-eight-outline me-1"></i>02:00pm <span class="px-1">To</span> 4:00pm</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="my-1">
-                            <div class="d-flex align-items-start" id="tooltips-container">
-                                <div class="">
-                                    <i class="mdi mdi-circle h3 text-success"></i>
-                                </div>
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1 mt-0">Meet Our Clients</h5>
-                                    <ul class="list-inline text-muted font-12">
-                                        <li class="list-inline-item"><i class="mdi mdi-calendar-blank-outline me-1"></i>11 May 2021</li>
-                                        <li class="list-inline-item"> - </li>
-                                        <li class="list-inline-item"><i class="mdi mdi-clock-time-eight-outline me-1"></i>08:00am <span class="px-1">To</span> 11:20am</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="my-1">
-                            <div class="d-flex align-items-start" id="tooltips-container">
-                                <div class="">
-                                    <i class="mdi mdi-circle h3 text-warning"></i>
-                                </div>
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1 mt-0">Project Discussion</h5>
-                                    <ul class="list-inline text-muted font-12">
-                                        <li class="list-inline-item"><i class="mdi mdi-calendar-blank-outline me-1"></i>11 May 2021</li>
-                                        <li class="list-inline-item"> - </li>
-                                        <li class="list-inline-item"><i class="mdi mdi-clock-time-eight-outline me-1"></i>12:00am <span class="px-1">To</span> 03:00am</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="my-1">
-                            <div class="d-flex align-items-start" id="tooltips-container">
-                                <div class="">
-                                    <i class="mdi mdi-circle h3 text-dark"></i>
-                                </div>
-                                <div class="w-100 ms-2">
-                                    <h5 class="mb-1 mt-0">Businees Meeting</h5>
-                                    <ul class="list-inline text-muted font-12">
-                                        <li class="list-inline-item"><i class="mdi mdi-calendar-blank-outline me-1"></i>12 May 2021</li>
-                                        <li class="list-inline-item"> - </li>
-                                        <li class="list-inline-item"><i class="mdi mdi-clock-time-eight-outline me-1"></i>08:30am <span class="px-1">To</span> 10:00am</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                        
-                    </div>
-                </div>
-            </div> -->
+          
         </div> <!-- end col-->
 
         <div class="col-xl-7">
@@ -221,7 +86,7 @@
                     <!-- Story Box-->
                     <div class="border border-light p-2 mb-3" *ngFor="let post of hostPostArray">
                         <div class="d-flex align-items-start">
-                            <img class="me-2 avatar-sm rounded-circle" src="{{post.businessImg}}" >
+                            <img class="me-2 avatar-sm rounded-circle" src="{{imagePath}}{{post.businessImg}}" >
                             <div class="w-100">
                                 <Strong>{{post.hostName}}</Strong> posted
                                 <p class="text-muted"><small>{{post.createdAt | date:'mediumDate'}}</small></p>
@@ -246,8 +111,8 @@
                         <div class="mt-2">
                             <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-heart-outline"></i> {{post.likes.length}} Like</a>
                             <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-reply"></i> Reply</a>
-                            <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-share-variant"></i> Share</a>
                         </div>
+                        <hr>
                     </div>
 
             
@@ -263,4 +128,4 @@
     <!-- end row-->
 
 </div>
-
+<app-footer></app-footer>

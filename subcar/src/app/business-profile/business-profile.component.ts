@@ -16,7 +16,9 @@ export class BusinessProfileComponent implements OnInit {
   counter=0;
   postsArray=[];
   hostPostArray=[];
-  
+  key =  localStorage.getItem("user")
+  data = JSON.parse(this.key)
+  followingg = this.data[Object.keys(this.data)[4]]
   imagePath:any='http://localhost:3000/';
   constructor(
     private popupservice:PopupService,
@@ -32,7 +34,14 @@ export class BusinessProfileComponent implements OnInit {
     })
    
   }
-
+  checkIfFollowing(id){
+    for(let i of this.followingg){
+      if(i==id){
+        return true
+      }
+    }
+    return false
+  }
 
   gethostdetails(){
     this.popupservice.getallhosts().subscribe((data) => {

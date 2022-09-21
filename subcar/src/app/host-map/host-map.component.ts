@@ -17,15 +17,8 @@ export class HostMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(!navigator.geolocation){
-      console.log("location is not supported");
-    }
-navigator.geolocation.getCurrentPosition((position) => {
-  const coords = position.coords;
-  console.log(
-    `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-  );
-  let map = L.map('map').setView([coords.latitude, coords.longitude], 9);
+
+  let map = L.map('map').setView([this.lat, this.lon], 9);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
    
@@ -33,7 +26,7 @@ navigator.geolocation.getCurrentPosition((position) => {
 let marker = L.marker([this.lat, this.lon]).addTo(map);
 marker.bindPopup(this.businussName).openPopup();
 
-});
+
   }
 
 }

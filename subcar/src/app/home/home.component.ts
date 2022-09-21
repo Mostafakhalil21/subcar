@@ -14,14 +14,7 @@ import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { BusinessProfileComponent } from '../business-profile/business-profile.component';
 import { PopupService } from '../services/popup.service';
 import { UserChatComponent } from '../user-chat/user-chat.component';
-
-
-
-
-
-
-
-
+import { UserMapService } from '../services/user-map.service';
 
 
 @Component({
@@ -40,9 +33,16 @@ export class HomeComponent implements OnInit {
   name = this.data[Object.keys(this.data)[1]];
   username = this.data[Object.keys(this.data)[2]]
   userImage = this.data[Object.keys(this.data)[5]]
+  email = this.data[Object.keys(this.data)[3]]
+  followingg = this.data[Object.keys(this.data)[4]]
+
+  
 following:object;
 closeResult = '';
+public searchFilter: any = '';
 
+
+recommendedForMe:any=[]
 imagePath:any='http://localhost:3000/';
   constructor(
 
@@ -52,16 +52,18 @@ imagePath:any='http://localhost:3000/';
     private hostAuth:HostAuthService,
     private flashMessage:FlashMessagesService,
     private modealService:NgbModal,
-    private popupservice:PopupService
-  
-
-    
-  ) { 
-    
+    private popupservice:PopupService,
+    private usermapservice:UserMapService
+  ) {  
+     
   }
-
+  addItem(newItem: string) {
+    this.searchFilter=newItem;
+  }
   ngOnInit(): void {
-  
+  this.usermapservice.recivedId().subscribe(data => {
+    this.recommendedForMe=data;
+  })
 
     this.userpost.refreshNeeded$.subscribe(()=>{
       this.getallposts();
@@ -72,25 +74,31 @@ imagePath:any='http://localhost:3000/';
     this.getAllHosts();
     this.getfollowinghosts();
     
- 
+ console.log(this.recommendedForMe)
   }
 
-
+  checkIfFollowing(id){
+    for(let i of this.followingg){
+      if(i==id){
+        return true
+      }
+    }
+    return false
+  }
 
   getallposts(){
     this.userpost.getFollowingPosts().subscribe((data) =>{
     let flatData=data.flat();
     flatData.reverse();
     this.post=flatData;
+    
     })
     }
-
     getfollowinghosts(){
       this.userpost.getfollowerHosts().subscribe((data) =>{
         this.following=data;
       })
     }
-
     getAllHosts(){
       this.userpost.getAllHosts().subscribe((data) =>{
         this.hosts=data;
@@ -100,34 +108,22 @@ followHost(host){
   this.userpost.followHost(host).subscribe((data)=> {
    
   })
-  console.log(host)
+
 }
 unfollowHost(host){
   this.userpost.UnfollowHost(host).subscribe((data)=> {
    
   })
-  console.log(host)
-}
 
+}
 refresh(): void {
   window.location.reload();
 }
 
 sendhostdetails(hostid){
-// this.hostAuth.gethostdetails(hostid)
-this.popupservice.sendId(hostid)
-// this.hostAuth.countallhostposts(hostid);
-  console.log(hostid);
-}
 
-onLogoutClick(){
-  this.authservice.logout();
-  this.flashMessage.show('You are logged out' , {
-    cssClass:'alert-success',
-    timeout:3000
-  });
-  this.router.navigate(['/login']);
-  return false;
+this.popupservice.sendId(hostid)
+
 }
 
 likepost(postId){
