@@ -46,6 +46,9 @@ hostBusinessName;
     this.getallHosts();
     this.getallMessagesForHost();
 
+
+ 
+
   }
 
   getallHosts(){
@@ -87,6 +90,8 @@ hostBusinessName;
       }
     }
     this.MyContentArray.reverse();
+
+    
   }
 
   sendUserdetails(hostid){

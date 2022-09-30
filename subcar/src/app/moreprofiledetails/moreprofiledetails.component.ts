@@ -5,6 +5,7 @@ import { PopupService } from '../services/popup.service';
 import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ChatComponent } from '../chat/chat.component';
 import { ChatService } from '../services/chat.service';
+import { UserpostsService } from '../services/userposts.service';
 
 
 @Component({
@@ -23,17 +24,25 @@ export class MoreprofiledetailsComponent implements OnInit {
   imagePath:any='http://localhost:3000/';
   key =  localStorage.getItem("user")
   data = JSON.parse(this.key)
+  id= this.data[Object.keys(this.data)[0]]
   followingg = this.data[Object.keys(this.data)[4]]
 
   constructor(
     private  actRoute:ActivatedRoute,
     private popupservice:PopupService,
     private modealService:NgbModal,
-    private chatService:ChatService
+    private chatService:ChatService,
+    private userpost:UserpostsService
 
     ) { }
 
   ngOnInit(): void {
+
+    this.userpost.refreshNeeded$.subscribe(()=>{
+      this.getallposts();
+      this.getAllHosts();
+    
+    })
     this.hostId = this.actRoute.snapshot.params['_id'];
     this.getAllHosts();
     this.getallposts();
@@ -63,12 +72,23 @@ export class MoreprofiledetailsComponent implements OnInit {
     return false
   }
 
+  checkifLiked(ArrayOfLikes){
+    for(let i of ArrayOfLikes){
+      if(i=== this.id){
+        return true
+        
+      }
+    }
+    return false
+  }
+
  
   getallposts(){
     this.popupservice.getallPosts().subscribe((data) =>{
       let flatData=data.flat();
       this.postsArray=flatData.reverse();;
       this.searchposts();
+      
     })
   }
   searchposts(){
@@ -85,6 +105,12 @@ export class MoreprofiledetailsComponent implements OnInit {
   sendhostdetails(hostid){
     this.chatService.sendId(hostid)
       
+    }
+
+    likepost(postId){
+      this.userpost.likePost(postId).subscribe((data) => {
+        location.reload();
+      })
     }
 
 

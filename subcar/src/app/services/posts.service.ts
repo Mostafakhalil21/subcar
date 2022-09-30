@@ -50,4 +50,13 @@ export class PostsService {
     return this.http.get('http://localhost:3000/posts/get/posts')
   }
 
+  getallcodes():Observable<any>{
+    return this.http.get('http://localhost:3000/posts/get/code')
+  }
+
+  deletePost(id):Observable<any>{
+      
+      return this.http.delete(this.baseURL+'delete/'+`${id}/`+`${this.id}`)
+  }
+
 }

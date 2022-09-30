@@ -22,7 +22,7 @@ export class HostnavbarComponent implements OnInit {
 
 
   onLogoutClick(){
-    this.authservice.logout();
+    this.authservice.hostlogout();
     this.flashMessage.show('You are logged out' , {
       cssClass:'alert-success',
       timeout:3000

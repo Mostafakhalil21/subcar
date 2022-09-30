@@ -51,7 +51,8 @@ router.post("/createpost" , upload.single('hostImage') , async(req,res) =>{
     carcolor:req.body.carcolor,
     caryear:req.body.caryear,
     desc:req.body.desc,
-    price:req.body.price
+    price:req.body.price,
+    code:req.body.code
    
 
   })
@@ -93,10 +94,10 @@ router.put("/posts/:id", async (req, res) => {
 
 
 //delete a post
-router.delete("/posts/:id", async (req, res) => {
+router.delete("/delete/:id/:userId", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId === req.body.userId) {
+    if (post.userId === req.params.userId) {
       await post.deleteOne();
       res.status(200).json("the post has been deleted");
     } else {
@@ -141,13 +142,15 @@ router.get("/:id" , async (req,res) =>{
 
 //get all posts of user followiing  // get timeline posts
 router.get("/timeline/:id" , async (req , res ) => {
+
   try{
     const currentUser = await User.findById(req.params.id);
     const friendPosts = await Promise.all(
       currentUser.following.map((friendId) =>{
-        return Post.find({userId:friendId});
+        return Post.find({userId:friendId})
       })
     );
+    
     res.json(friendPosts)
   }catch(err){
     res.status(500).json(err);
@@ -192,6 +195,15 @@ router.get("/get/posts" , (req,res) =>{
   })
 })
 
+
+router.get("/get/code" , async (req ,res ) => {
+  try{
+    const codes = await Post.find().distinct("userId")
+    res.status(200).json(codes)
+  }catch(err){
+    res.status(500).json(err)
+  }
+})
 
 
 module.exports = router;

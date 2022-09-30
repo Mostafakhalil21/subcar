@@ -32,8 +32,16 @@ export class EditHostProfileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.edithostservice.getProfile().subscribe(profile =>{
-      this.host=profile.user;
+    this.name = this.data[Object.keys(this.data)[1]]
+    this.businessName = this.data[Object.keys(this.data)[2]]
+    this.email = this.data[Object.keys(this.data)[3]]
+    this.businessImg = this.data[Object.keys(this.data)[4]]
+    this.phone = this.data[Object.keys(this.data)[6]]
+    this.city = this.data[Object.keys(this.data)[7]]
+    this.from = this.data[Object.keys(this.data)[8]]
+    this.desc = this.data[Object.keys(this.data)[9]]
+    this.edithostservice.gethostprofile().subscribe(profile =>{
+      this.host=profile[0];
       console.log(this.host)
     },
     err =>{

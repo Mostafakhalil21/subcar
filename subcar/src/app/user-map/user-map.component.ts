@@ -71,7 +71,7 @@ let userMarker = L.marker([coords.latitude, coords.longitude] ,{icon:greenIcon} 
 userMarker.bindPopup("<center><Strong>Me</Strong></center>").openPopup();
 
 this.sortedarray = this.arr.sort((a, b) => a.distance - b.distance);
-console.log(this.sortedarray,"h")
+// console.log(this.sortedarray,"h")
 for(let j of this.sortedarray){
   for(let i of this.Markersrray){
       if(j._id == i._id){

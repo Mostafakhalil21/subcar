@@ -21,11 +21,15 @@ export class PopupService {
   constructor(private http:HttpClient ) { }
 
   getallhosts():Observable<any>{
-    return this.http.get(this.hostURL + 'allhosts')
+    return this.http.get(this.hostURL + 'allhosts').pipe(tap(() =>{
+      this._refreshNeeded$.next();
+    }));
   }
 
   getallPosts():Observable<any>{
-    return this.http.get('http://localhost:3000/posts/get/posts')
+    return this.http.get('http://localhost:3000/posts/get/posts').pipe(tap(() =>{
+      this._refreshNeeded$.next();
+    }));
   }
   
   sendId(id){

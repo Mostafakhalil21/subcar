@@ -21,18 +21,44 @@ export class PostPopUpComponent implements OnInit {
  desc;
  price;
 
+
+
+ code;
   constructor(
     private postservice:PostsService,) {
     
    }
 
   ngOnInit(): void {
+
+    this.postservice.getallcodes().subscribe((data) => {
+      let random = Math.floor(Math.random() * 1000000);
+      console.log(random)
+          while(data.includes(random)){
+              random = Math.floor(Math.random() * 1000000);
+          }
+          this.code=random;
+    })
+    
   }
 
   selectImage(event){
     this.img = event.target.files[0];
    
   }
+
+
+
+
+//  getRandomInt(max) {
+    
+//     let random = Math.floor(Math.random() * max);
+//     console.log(random)
+//         while(this.arr.includes(random)){
+//             random = Math.floor(Math.random() * max);
+//         }
+//     return random
+//   }
 
   OnPostSubmit(){
     let formdata = new FormData();
@@ -47,6 +73,7 @@ export class PostPopUpComponent implements OnInit {
     formdata.set("caryear" , this.caryear)
     formdata.set("desc" , this.desc)
     formdata.set("price" , this.price)
+    formdata.set("code" , this.code)
 
     
 

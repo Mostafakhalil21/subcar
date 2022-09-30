@@ -137,3 +137,13 @@
 .my-float{
 	margin-top:16px;
 }
+.delete img{
+    width: 30px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.delete img:hover{
+    transform: scale(1.2);
+}
+

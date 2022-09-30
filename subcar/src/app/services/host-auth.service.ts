@@ -12,7 +12,9 @@ export class HostAuthService {
   authToken :any ;
   host:any;
 
-
+  // key=localStorage.getItem('host')
+  // data = JSON.parse(this.key)
+  // hostid= this.data[Object.keys(this.data)[0]]
 
   
 id :any;
@@ -55,6 +57,7 @@ getProfile() :Observable<any>{
     
   )}
 
+  
 
 
   
@@ -113,6 +116,8 @@ countallhostposts(id){
 }
 
 
-
+gethostprofile(id){
+  return this.http.get(this.baseURL+'hostprofile/'+ `${id}`)
+}
 
 }

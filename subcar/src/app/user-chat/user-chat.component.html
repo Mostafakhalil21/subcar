@@ -13,26 +13,30 @@
                     </div>
                     <input name="search" [(ngModel)]="searchFilter" type="text" class="form-control" placeholder="Search...">
                 </div>
+                <div  class="container">
                 <ul class="list-unstyled chat-list mt-2 mb-0" >
                     <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix" *ngFor="let i of newHostsArray | searchFilter: searchFilter">
+                        <div class="imgContainer">
                         <img  src="{{imagePath}}{{i.businessImg}}" alt="avatar">
                         <div class="about">
                             <div   class="name">{{i.businessName}}</div>
                         </div>
+                    </div>
                     </li>
                     
                 </ul>
+            </div>
             </div>
            
             <div class="chat" >
                 <div class="chat-header clearfix">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div style="display: flex; align-items: center; " class="col-lg-6">
                             <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                <img src="{{imagePath}}{{img}}" >
+                                <img *ngIf="img" src="{{imagePath}}{{img}}" >
                             </a>
                             <div class="chat-about">
-                                <h6 class="m-b-0">{{hostBusinessName}}</h6>
+                                <h5 class="m-b-0">{{hostBusinessName}}</h5>
                             </div>
                         </div>
                    

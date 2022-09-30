@@ -10,8 +10,8 @@ export class HostMapComponent implements OnInit {
   key =  localStorage.getItem("host")
   data = JSON.parse(this.key)
   id= this.data[Object.keys(this.data)[0]]
-  lat=this.data[Object.keys(this.data)[6]]
-  lon=this.data[Object.keys(this.data)[7]]
+  lat=this.data[Object.keys(this.data)[10]]
+  lon=this.data[Object.keys(this.data)[11]]
   businussName=this.data[Object.keys(this.data)[2]]
 
   constructor() { }

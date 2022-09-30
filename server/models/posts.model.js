@@ -47,6 +47,10 @@ const postSchema = new mongoose.Schema(
     },
     price:{
       type:String,
+    },
+    code:{
+      type:Number,
+      
     }
   },
   { timestamps: true }

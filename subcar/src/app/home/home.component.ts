@@ -6,7 +6,6 @@ import { UserpostsService } from '../services/userposts.service';
 import { post } from '../models/posts.model';
 import { DatePipe } from '@angular/common';
 import * as $ from 'jquery';
-import { HostAuthService } from '../services/host-auth.service';
 import { FlashMessagesComponent, FlashMessagesService } from 'flash-messages-angular';
 import { NgModel } from '@angular/forms';
 import { HostProfileComponent } from '../host-profile/host-profile.component';
@@ -15,6 +14,7 @@ import { BusinessProfileComponent } from '../business-profile/business-profile.c
 import { PopupService } from '../services/popup.service';
 import { UserChatComponent } from '../user-chat/user-chat.component';
 import { UserMapService } from '../services/user-map.service';
+import { ChatService } from '../services/chat.service';
 
 
 @Component({
@@ -41,7 +41,8 @@ following:object;
 closeResult = '';
 public searchFilter: any = '';
 
-
+code:any;
+userId:any;
 recommendedForMe:any=[]
 imagePath:any='http://localhost:3000/';
   constructor(
@@ -49,11 +50,11 @@ imagePath:any='http://localhost:3000/';
     private router:Router,
     private authservice:AuthService,
     private userpost:UserpostsService,
-    private hostAuth:HostAuthService,
     private flashMessage:FlashMessagesService,
     private modealService:NgbModal,
     private popupservice:PopupService,
-    private usermapservice:UserMapService
+    private usermapservice:UserMapService,
+    private chatService:ChatService
   ) {  
      
   }
@@ -63,6 +64,10 @@ imagePath:any='http://localhost:3000/';
   ngOnInit(): void {
   this.usermapservice.recivedId().subscribe(data => {
     this.recommendedForMe=data;
+  })
+
+  this.chatService.recivedId().subscribe(data => {
+    this.code=data;
   })
 
     this.userpost.refreshNeeded$.subscribe(()=>{
@@ -86,11 +91,29 @@ imagePath:any='http://localhost:3000/';
     return false
   }
 
+  checkifLiked(ArrayOfLikes){
+    for(let i of ArrayOfLikes){
+      if(i=== this.id){
+        return true
+      }
+    }
+    return false
+  }
+  byDate(a, b) {
+    //chronologically by year, month, then day
+    return new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf(); //timestamps
+  }
   getallposts(){
     this.userpost.getFollowingPosts().subscribe((data) =>{
+      let x = data;
+      var merged = [].concat.apply([], x);
+   
+      console.log(merged.sort(this.byDate))
+    merged.flat();
+    merged.reverse();
     let flatData=data.flat();
     flatData.reverse();
-    this.post=flatData;
+    this.post=merged;
     
     })
     }
@@ -121,8 +144,9 @@ refresh(): void {
 }
 
 sendhostdetails(hostid){
-
 this.popupservice.sendId(hostid)
+this.chatService.sendId(hostid)
+console.log(hostid)
 
 }
 
@@ -130,6 +154,28 @@ likepost(postId){
   this.userpost.likePost(postId).subscribe((data) => {
   })
 }
+
+sendreplay(userId,code){
+this.code=code;
+this.userId=userId;
+}
+
+
+
+sendSubmit(){
+    
+  const sendReplay = {
+    sender:this.id,
+    receiver:this.userId,
+    message:this.code+` Hi im interested in this Car can we talk ? `
+  }
+  this.chatService.createMessage(sendReplay).subscribe(res => {
+   this.openMessages();
+    
+   })
+   
+}
+
 openMessages(){
   this.modealService.open(UserChatComponent, {size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
@@ -155,6 +201,8 @@ private getDismissReason(reason: any): string {
     return `with: ${reason}`;
   }
 }
+
+
 }
 
 

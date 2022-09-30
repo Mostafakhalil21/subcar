@@ -58,5 +58,8 @@ export class EditHostProfileService {
     recivedId():Observable<String>{
     return this.subject.asObservable();
     }
+    gethostprofile(){
+      return this.http.get(this.hostURL+'hostprofile/'+ `${this.id}`)
+    }
 
 }

@@ -99,6 +99,10 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
               hostPosts:host.hostPosts,
               businessImg:host.businessImg,
               follower:host.follower,
+              phone:host.phone,
+              city:host.city,
+              from:host.from,
+              desc:host.desc,
               lat:host.lat,
               lon:host.lon
             }
@@ -162,6 +166,15 @@ router.post('/register', upload.single('hostImage') , (req, res, next) => {
 
 
     });
+
+    router.get('/hostprofile/:id', async(req , res) => {
+      try{
+            const host = await Hosting.find({_id:req.params.id})
+            res.status(200).json(host)
+      }catch(err){
+        res.status(500).json(err)
+      }
+    })
 
     //get a host
 router.get("/gethost/:id" , async (req,res) =>{

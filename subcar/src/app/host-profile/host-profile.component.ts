@@ -21,8 +21,13 @@ export class HostProfileComponent implements OnInit {
   key =  localStorage.getItem("host")
  data = JSON.parse(this.key)
  id= this.data[Object.keys(this.data)[0]]
- name = this.data[Object.keys(this.data)[2]]
+ name = this.data[Object.keys(this.data)[1]]
+ busnessName = this.data[Object.keys(this.data)[2]]
+ email = this.data[Object.keys(this.data)[3]]
  businessImg = this.data[Object.keys(this.data)[4]]
+ follower = this.data[Object.keys(this.data)[5]]
+ phone = this.data[Object.keys(this.data)[6]]
+
  img;
  
  Post=new post("","","","","","","","","","")
@@ -68,9 +73,9 @@ export class HostProfileComponent implements OnInit {
 
 
     
-    this.hostAuth.getProfile().subscribe(profile =>{
-      this.host=profile.user;
-      console.log(profile.user)
+    this.hostAuth.gethostprofile(this.id).subscribe(profile =>{
+      this.host=profile[0];
+      
     },
     err =>{
       console.log(err);
@@ -87,6 +92,17 @@ export class HostProfileComponent implements OnInit {
 
   // ------------------- //
 
+  deletepost(id){
+    if(confirm("Are you sure to delete ")) {
+      this.postservice.deletePost(id).subscribe((data)=> {
+        location.reload();
+      })
+    }
+
+ }
+
+
+
   addItem(newItem: string) {
     this.searchFilter=newItem;
   }
@@ -96,7 +112,7 @@ export class HostProfileComponent implements OnInit {
       console.log("location is not supported");
     }
 
-
+    if(confirm("Are you sure you want to Locate/Relocate you'r business on map ?")) {
 navigator.geolocation.getCurrentPosition((position) => {
   const coords = position.coords;
   this.lat=coords.latitude;
@@ -118,6 +134,7 @@ navigator.geolocation.getCurrentPosition((position) => {
     }
   })
 })
+    }
   }
 
 

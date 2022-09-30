@@ -177,8 +177,8 @@
                   
 
                   <div class="mt-2">
-                      <a (click)="likepost(post._id)" href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-heart-outline"></i> {{post.likes.length}} Interested</a>
-                      <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-reply"></i> Reply</a>
+                      <a (click)="likepost(post._id)" class="btn btn-sm btn-link text-muted"><i *ngIf="!checkifLiked(post.likes)" class="mdi mdi-heart-outline"></i><i *ngIf="checkifLiked(post.likes)"  style="color: red;" class="mdi mdi-heart"></i> {{post.likes.length}}</a> 
+                      <a (click)="sendreplay(post.userId,post.code)" (click)="sendSubmit()" href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-reply"></i> Reply</a>
                   </div>
                   <hr />
               </div>
@@ -199,7 +199,7 @@
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<a (click)="openMessages()" class="float" target="_blank">
+<a style="cursor: pointer;" (click)="openMessages()" class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 
