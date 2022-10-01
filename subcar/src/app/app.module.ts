@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidateService } from './services/validate.service';
 import { FlashMessagesModule } from 'flash-messages-angular';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './guards/auth.guard';
@@ -36,7 +36,13 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { UserMapComponent } from './user-map/user-map.component';
 import { SearchFilterPipe } from './search-filter.pipe';
-
+import { NgImageSliderModule } from 'ng-image-slider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { InterceptorService } from './loader/interceptor.service';
+import {MatMenuModule} from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     AboutComponent,
     UserMapComponent,
     SearchFilterPipe,
+    EditUserProfileComponent,
     
   ],
   imports: [
@@ -72,14 +79,20 @@ import { SearchFilterPipe } from './search-filter.pipe';
     NgbModule,
     FlashMessagesModule.forRoot(),
     ReactiveFormsModule,
-    
+    NgImageSliderModule,
+    MatProgressBarModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatIconModule
     
 
    
     
     
   ],
-  providers: [ValidateService , AuthService , AuthGuard , HostAuthGuard ,HostAuthService, HostAuthService ,UserpostsService  , PostsService],
+  providers: [ValidateService , AuthService , AuthGuard , HostAuthGuard ,HostAuthService, HostAuthService ,UserpostsService  , PostsService ,
+  {provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

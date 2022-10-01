@@ -9,12 +9,14 @@
                 
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="{{imagePath}}{{host.businessImg}}" alt="">
-                    <!-- Profile picture help block-->
+                    <div style="width: 100%;" class="img-container">
+                        <img style="width: 100%;"  [src]="imgURL" height="200" *ngIf="imgURL" alt="">
+          
+                    </div>                  
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
                     <label class="btn btn-primary" for="files" type="button">Upload new image</label>
-                    <input  [(ngModel)]="img" id="files" style="visibility:hidden;" [(ngModel)]="userImage" name="userImage" type="file" placeholder="userImage" (change)="selectImage($event)"/>
+                    <input  [(ngModel)]="img" id="files" style="visibility:hidden;" [(ngModel)]="userImage" name="userImage" type="file" placeholder="userImage" #file (change)="preview(file.files)" (change)="selectImage($event)"/>
                 </div>
             </div>
         </div>

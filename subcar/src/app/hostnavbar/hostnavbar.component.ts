@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-hostnavbar',
   templateUrl: './hostnavbar.component.html',
@@ -13,7 +14,8 @@ export class HostnavbarComponent implements OnInit {
   constructor(
     public authservice:AuthService,
     private router:Router,
-    private flashMessage:FlashMessagesService  
+    private flashMessage:FlashMessagesService,
+  
   ) { }
 
   ngOnInit(): void {

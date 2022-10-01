@@ -5,8 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { UserpostsService } from '../services/userposts.service';
 import { post } from '../models/posts.model';
 import { DatePipe } from '@angular/common';
-import * as $ from 'jquery';
-import { FlashMessagesComponent, FlashMessagesService } from 'flash-messages-angular';
+import {  FlashMessagesService } from 'flash-messages-angular';
 import { NgModel } from '@angular/forms';
 import { HostProfileComponent } from '../host-profile/host-profile.component';
 import { NgbModal , ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +14,8 @@ import { PopupService } from '../services/popup.service';
 import { UserChatComponent } from '../user-chat/user-chat.component';
 import { UserMapService } from '../services/user-map.service';
 import { ChatService } from '../services/chat.service';
+import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile.component';
+import { EditUserProfileService } from '../services/edit-user-profile.service';
 
 
 @Component({
@@ -25,18 +26,15 @@ import { ChatService } from '../services/chat.service';
 export class HomeComponent implements OnInit {
   key =  localStorage.getItem("user")
   data = JSON.parse(this.key)
-  user:object;
   post:post[]=[];
   hosts:object;
   myDate = new Date();
   id= this.data[Object.keys(this.data)[0]]
-  name = this.data[Object.keys(this.data)[1]];
-  username = this.data[Object.keys(this.data)[2]]
-  userImage = this.data[Object.keys(this.data)[5]]
-  email = this.data[Object.keys(this.data)[3]]
   followingg = this.data[Object.keys(this.data)[4]]
 
+
   
+  userData;
 following:object;
 closeResult = '';
 public searchFilter: any = '';
@@ -54,7 +52,8 @@ imagePath:any='http://localhost:3000/';
     private modealService:NgbModal,
     private popupservice:PopupService,
     private usermapservice:UserMapService,
-    private chatService:ChatService
+    private chatService:ChatService,
+    private edituserprofileService:EditUserProfileService
   ) {  
      
   }
@@ -65,6 +64,9 @@ imagePath:any='http://localhost:3000/';
   this.usermapservice.recivedId().subscribe(data => {
     this.recommendedForMe=data;
   })
+  this.edituserprofileService.getUserProfile().subscribe((data)=>{
+    this.userData=data;
+  })
 
   this.chatService.recivedId().subscribe(data => {
     this.code=data;
@@ -74,6 +76,7 @@ imagePath:any='http://localhost:3000/';
       this.getallposts();
       this.getAllHosts();
       this.getfollowinghosts();
+
     });
     this.getallposts();
     this.getAllHosts();
@@ -201,6 +204,15 @@ private getDismissReason(reason: any): string {
     return `with: ${reason}`;
   }
 }
+openEdit() {
+  this.modealService.open(EditUserProfileComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
+
 
 
 }

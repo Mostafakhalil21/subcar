@@ -129,3 +129,30 @@
 .my-float{
 	margin-top:16px;
 }
+
+.img-container{
+    width: 60%;
+}
+
+.img-container img{
+    width: 100%;
+}
+
+
+@media (max-width:360px){
+    .img-container{
+        width: 100%;
+    }
+    .img-container img{
+        width: 100%;
+
+    }
+}
+
+@media (max-width:390px){
+    .img-container{
+        width: 100%;
+    }
+
+}
+

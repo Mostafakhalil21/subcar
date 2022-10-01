@@ -10,6 +10,7 @@ import { HostChatComponent } from '../host-chat/host-chat.component';
 import { HostChatService } from '../services/host-chat.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { LatlonService } from '../services/latlon.service';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @Component({

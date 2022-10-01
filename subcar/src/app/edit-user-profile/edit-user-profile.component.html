@@ -1,0 +1,62 @@
+<div class="xicon" (click)="X()">
+    <mat-icon >close</mat-icon>
+    </div>
+    <br>
+<div class="container-xl px-4 mt-4">
+    
+    <form (submit)="OnPostSubmit()" >
+   
+    <div class="row">
+        
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                
+                <div class="card-header">Profile Picture</div>
+                
+                <div class="card-body text-center">
+                    
+                    <!-- Profile picture image-->
+                    <div style="width: 100%;" class="img-container">
+                    <img style="width: 100%;"  [src]="imgURL" height="200" *ngIf="imgURL" alt="">
+      
+                </div>
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <label class="btn btn-primary" for="files" type="button">Upload new image</label>
+                    <input  [(ngModel)]="img" id="files" style="visibility:hidden;" [(ngModel)]="userImage" name="userImage" type="file" placeholder="userImage" #file (change)="preview(file.files)" (change)="selectImage($event)"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                            <input [(ngModel)]="name"  name="name" class="form-control" id="inputUsername" type="text" placeholder="Enter your name" >
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                            <input [(ngModel)]="username"  name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input [(ngModel)]="email" name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" >
+                        </div>
+                 
+                        
+           
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HostAuthService } from '../services/host-auth.service';
 import { FormControl, FormGroup } from '@angular/forms'
 import { EditHostProfileService } from '../services/edit-host-profile.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-edit-host-profile',
   templateUrl: './edit-host-profile.component.html',
@@ -21,6 +22,9 @@ export class EditHostProfileComponent implements OnInit {
   city;
   email;
 
+  public imagePathh;
+  imgURL: any;
+  public message: string;
   
   key =  localStorage.getItem("host")
   data = JSON.parse(this.key)
@@ -28,7 +32,9 @@ export class EditHostProfileComponent implements OnInit {
   imagePath:any='http://localhost:3000/';
   constructor(
     private hostAuth:HostAuthService,
-    private edithostservice:EditHostProfileService
+    private edithostservice:EditHostProfileService,
+    private modealService:NgbModal,
+
     ) { }
 
   ngOnInit(): void {
@@ -72,10 +78,30 @@ export class EditHostProfileComponent implements OnInit {
       
   
       this.edithostservice.updateHost(formdata).subscribe(res => {
-       console.log("works")
+        this.modealService.dismissAll();
+        location.reload();
        
       })
    
 
+  }
+
+
+  preview(files) {
+    if (files.length === 0)
+      return;
+  
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+  
+    var reader = new FileReader();
+    this.imagePathh = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
   }
 }

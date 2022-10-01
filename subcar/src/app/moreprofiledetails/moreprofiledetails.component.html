@@ -104,9 +104,9 @@
                         <br>
                         <a><Strong>More Info : </Strong><br>{{post.desc}}</a>
                         <br><br>
-
+                        <div class="img-container">
                         <img src="{{imagePath}}{{post.img}}" alt="post-img" class="rounded me-1" height="300">
-                        
+                    </div>
 
                         <div class="mt-2">
                             <a (click)="likepost(post._id)" class="btn btn-sm btn-link text-muted"><i *ngIf="!checkifLiked(post.likes)" class="mdi mdi-heart-outline"></i><i *ngIf="checkifLiked(post.likes)"  style="color: red;" class="mdi mdi-heart"></i> {{post.likes.length}}</a> 
@@ -117,9 +117,7 @@
 
             
 
-                    <div class="text-center">
-                        <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-spin mdi-loading me-1"></i> Load more </a>
-                    </div>
+                    
                 </div>
             </div> <!-- end card-->
 

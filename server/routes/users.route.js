@@ -55,7 +55,26 @@ router.post('/register', upload.single('hostImage'), (req, res, next) => {
       }
     });
   });
-  
+
+  //update User
+  router.put('/:id', upload.single('hostImage'), (req, res) => {
+ 
+
+    var user = {
+                userImage:req.file.path,
+                name: req.body.name,
+                email: req.body.email,
+                username:req.body.username,
+    };
+    User.findByIdAndUpdate(req.params.id, {$set: user}, {new: true}, (err, doc) => {
+      if (!err) {
+        res.send(doc);
+      } else {
+        console.log('Error in user Update :' + JSON.stringify(err, undefined, 2));
+      }
+    });
+  });
+
   // Authenticate
   router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
@@ -188,6 +207,15 @@ router.get("/allusers" , async (req , res) => {
 
   }
 })
-  
+  router.get("/getuser/:id" , async (req,res) =>{
+  try{
+    const user = await User.findById(req.params.id);
+    const {password , updatedAt, ...other} = user._doc // not sending other and updateAt
+    res.status(200).json(other)
+
+  }catch(err){
+    res.status(500).json(err);
+  }
+})
   
   module.exports = router;
