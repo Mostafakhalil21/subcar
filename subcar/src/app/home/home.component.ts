@@ -234,14 +234,14 @@ open() {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
   });
 }
-openView() {
- 
-  this.modealService.open(PostDetailsComponent, {size: 'lg'}).result.then((result) => {
-    this.closeResult = `Closed with: ${result}`;
-  }, (reason) => {
-    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  });
-}
+  openView() {
+  
+    this.modealService.open(PostDetailsComponent, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
 private getDismissReason(reason: any): string {
   if (reason === ModalDismissReasons.ESC) {

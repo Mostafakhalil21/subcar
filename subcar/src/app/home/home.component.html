@@ -178,8 +178,8 @@
                   <!-- <ng-image-slider [images]="imgCollection" #nav></ng-image-slider> -->
                 </div>
                   <div class="mt-2">
-                      <a (click)="likepost(post._id)" class="btn btn-sm btn-link text-muted"><i *ngIf="!checkifLiked(post.likes)" class="mdi mdi-heart-outline"></i><i *ngIf="checkifLiked(post.likes)"  style="color: red;" class="mdi mdi-heart"></i> {{post.likes.length}}</a> 
-                      <a  (click)="sendreplay(post.userId,post.code)" (click)="sendSubmit()" href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-reply"></i> Reply</a>
+                      <a (click)="likepost(post._id)" class="btn btn-sm  text-muted"><i *ngIf="!checkifLiked(post.likes)" class="mdi mdi-heart-outline"></i><i *ngIf="checkifLiked(post.likes)"  style="color: red;" class="mdi mdi-heart"></i> {{post.likes.length}}</a> 
+                      <a  (click)="sendreplay(post.userId,post.code)" (click)="sendSubmit()"  class="btn btn-sm  text-muted"><i class="mdi mdi-reply"></i> Reply</a>
 
                   </div>
                
