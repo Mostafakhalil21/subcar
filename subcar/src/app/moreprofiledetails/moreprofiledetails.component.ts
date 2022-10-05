@@ -37,6 +37,7 @@ phone;
 city;
 follower;
 followersLength;
+public searchFilter: any = '';
 
 
 
@@ -58,7 +59,9 @@ code:any;
     private userpost:UserpostsService
 
     ) { }
-
+    addItem(newItem: string) {
+      this.searchFilter=newItem;
+    }
   ngOnInit(): void {
 
     this.checkiffollow();

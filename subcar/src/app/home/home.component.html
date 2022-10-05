@@ -204,7 +204,7 @@
                 <div class="job-list" *ngFor="let post of mostliked">
                     <div class="job-info">
                         <div class="job-details">
-                            <h3>{{post.hostName}}</h3>
+                            <h3  [routerLink]="['/moreprofiledetails',post.userId]">{{post.hostName}}</h3>
                             <p>{{post.cartype}} - {{post.caryear}} - {{post.ownersnumber}} ..</p>
                         </div>
                         <div  (click)="openView()" (click)="sendpostid(post)" class="ht-rate">

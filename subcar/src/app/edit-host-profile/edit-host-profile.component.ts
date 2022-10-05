@@ -104,4 +104,8 @@ export class EditHostProfileComponent implements OnInit {
       this.imgURL = reader.result; 
     }
   }
+  X(){
+    this.modealService.dismissAll();
+  }
+
 }

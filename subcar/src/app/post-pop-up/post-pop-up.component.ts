@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostsService } from '../services/posts.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class PostPopUpComponent implements OnInit {
 
  code;
   constructor(
-    private postservice:PostsService,) {
+    private postservice:PostsService,
+    private modealService:NgbModal) {
     
    }
 
@@ -86,5 +88,9 @@ export class PostPopUpComponent implements OnInit {
      
     })
  }
+
+ X(){
+  this.modealService.dismissAll();
+}
 
 }

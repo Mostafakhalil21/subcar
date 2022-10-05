@@ -59,3 +59,26 @@ body {
     border: 0;
     margin-bottom: 1rem;
 }
+.xicon{
+    float: right;
+    cursor: pointer;
+    margin-top: 15px;  
+    margin-right: 15px;
+ 
+}
+
+@media (max-width:390px){
+    .btn{
+    background: #2e323c; 
+    color: white;
+   
+
+    }
+    .text-right{
+        margin-right: 75%;
+    }
+    .post-title{
+        text-align: center;
+    }
+ 
+}

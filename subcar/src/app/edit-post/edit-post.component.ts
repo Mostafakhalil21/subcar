@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostsService } from '../services/posts.service';
 
 @Component({
@@ -23,7 +24,8 @@ postId;
   id= this.data[Object.keys(this.data)[0]]
 
   constructor(
-    private postService:PostsService
+    private postService:PostsService,
+    private modealService:NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,9 @@ postId;
     })
 
   }
-
+  X(){
+    this.modealService.dismissAll();
+  }
   editpost(){
 
     const newPost ={

@@ -15,7 +15,7 @@
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0" >
                     <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix"*ngFor="let i of newUsersArray">
-                        <img   src="{{imagePath}}{{i.userImage}}" alt="avatar">
+                        <img class="chat-image"  src="{{imagePath}}{{i.userImage}}" alt="avatar">
                         <div class="about">
                             <div    class="name">{{i.name}}</div>
                         </div>

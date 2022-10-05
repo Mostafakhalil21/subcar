@@ -1,5 +1,5 @@
 
-
+<div class="moredetails-container">
 <app-navbar></app-navbar>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <br><br>
@@ -79,13 +79,19 @@
         </div> <!-- end col-->
 
         <div class="col-xl-7">
-            <div class="card">
-                <div class="card-body">
+            <div style="margin-bottom: 8px;" class="input-group">
+                <div class="input-group-prepend">
+                    <span style="height: 100%; margin-right: 7px;" class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+                <input name="search" [(ngModel)]="searchFilter" type="text" class="form-control" placeholder="Search...">
+            </div>
+            <div class="card" *ngFor="let post of hostPostArray | searchFilter: searchFilter" >
+                <div class="card-body" >
      
           
 
                     <!-- Story Box-->
-                    <div class="border border-light p-2 mb-3" *ngFor="let post of hostPostArray">
+                    <div class="border border-light p-2 mb-3" >
                         <div class="d-flex align-items-start">
                             <img class="me-2 avatar-sm rounded-circle" src="{{imagePath}}{{post.businessImg}}" >
                             <div class="w-100">
@@ -113,7 +119,7 @@
                             <a (click)="likepost(post._id)" class="btn btn-sm btn-link text-muted"><i *ngIf="!checkifLiked(post.likes)" class="mdi mdi-heart-outline"></i><i *ngIf="checkifLiked(post.likes)"  style="color: red;" class="mdi mdi-heart"></i> {{post.likes.length}}</a> 
                             <a (click)="sendreplay(post.userId,post.code)" (click)="sendSubmit()" href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-reply"></i> Reply</a>
                         </div>
-                        <hr>
+                        
                     </div>
 
             
@@ -131,4 +137,5 @@
 <a style="cursor: pointer;" (click)="openMessages()" class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
-<app-footer></app-footer>
+<app-footer (newItemEvent)="addItem($event)"></app-footer>
+</div>
