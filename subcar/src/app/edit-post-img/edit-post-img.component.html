@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="col-xl-12">
+        <!-- Profile picture card-->
+        <div class="card">
+            
+           
+            
+            <div class="card-body text-center">
+                
+                <!-- Profile picture image-->
+                <div style="width: 100%;" class="img-container">
+                <img style="width: 100%;"   alt=""  [src]="imgURL" height="380" *ngIf="imgURL">
+              
+            </div>
+                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                <!-- Profile picture upload button-->
+                <label class="btn btn-primary" for="files" type="button">Upload new image</label>
+                <input  [(ngModel)]="img" id="files" style="visibility:hidden;" [(ngModel)]="img" name="userImage" type="file" placeholder="userImage" #file (change)="preview(file.files)" (change)="selectImage($event)"/>
+            </div>
+            <button class="check" (click)="editPostImage()" type="submit"><mat-icon>check_circle_outline</mat-icon></button>
+        </div>
+        
+    </div>
+    
+    
+    </div>

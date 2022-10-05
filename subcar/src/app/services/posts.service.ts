@@ -20,13 +20,19 @@ export class PostsService {
   constructor(private http:HttpClient) { }
 
   private _refreshNeeded$ = new Subject<void>();
+  private subject = new Subject<String>();
 
   get refreshNeeded$(){
     return this._refreshNeeded$;
   }
 
+  sendpost(post){
+    this.subject.next(post)
+  }
   
-
+  recivedpost():Observable<String>{
+  return this.subject.asObservable();
+  }
 
   createPost(Post):Observable<any>{
    
@@ -57,6 +63,14 @@ export class PostsService {
   deletePost(id):Observable<any>{
       
       return this.http.delete(this.baseURL+'delete/'+`${id}/`+`${this.id}`)
+  }
+
+  editpost(id ,post):Observable<any>{
+      return this.http.put(this.baseURL+'posts/'+`${id}`,post)
+  }
+
+  editPostImage(postId,postFormat){
+    return this.http.put(this.baseURL+'postimage/'+`${postId}` ,postFormat)
   }
 
 }

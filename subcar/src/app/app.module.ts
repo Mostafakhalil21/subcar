@@ -43,6 +43,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { TestComponent } from './test/test.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditPostImgComponent } from './edit-post-img/edit-post-img.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,10 @@ import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.
     UserMapComponent,
     SearchFilterPipe,
     EditUserProfileComponent,
+    TestComponent,
+    PostDetailsComponent,
+    EditPostComponent,
+    EditPostImgComponent,
     
   ],
   imports: [

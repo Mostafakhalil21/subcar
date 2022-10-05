@@ -9,7 +9,8 @@ export class MapComponent implements OnInit {
 
   key =  localStorage.getItem("user")
   data = JSON.parse(this.key)
-
+lat;
+lon;
   
 
 @Input() hero

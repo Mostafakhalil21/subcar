@@ -32,18 +32,21 @@ export class PostPopUpComponent implements OnInit {
   ngOnInit(): void {
 
     this.postservice.getallcodes().subscribe((data) => {
+      console.log(data)
       let random = Math.floor(Math.random() * 1000000);
       console.log(random)
           while(data.includes(random)){
               random = Math.floor(Math.random() * 1000000);
           }
           this.code=random;
+          console.log(this.code)
     })
     
   }
 
   selectImage(event){
     this.img = event.target.files[0];
+    console.log(event)
    
   }
 

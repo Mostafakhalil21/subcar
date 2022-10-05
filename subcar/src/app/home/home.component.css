@@ -1,7 +1,10 @@
-
+.background{
+    
+    background-color:#f4f2f2;   
+}
 
   body{
-    background-color:#ecf2f5;
+    background-color:#f4f2f2;   
     margin-top:20px;
 }
 
@@ -15,7 +18,7 @@
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background: #fdfdfd none repeat scroll 0 0;
     background-clip: border-box;
     border: 0 solid #ecf2f5;
     border-radius: .25rem;
@@ -131,11 +134,13 @@
 }
 
 .img-container{
-    width: 60%;
+    width: 100%;
+
 }
 
 .img-container img{
     width: 100%;
+    height: 10%;
 }
 
 
@@ -156,3 +161,134 @@
 
 }
 
+
+
+.list-group::-webkit-scrollbar{
+    display: none;
+}
+
+.containere {
+    width: 100%;
+    margin: 50px auto 50px;
+    background: #fdfdfd none repeat scroll 0 0;
+    padding: 0 20px 20px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.075);
+    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+    text-align: center;
+    position: relative;
+  }
+  .avatar-flip {
+    border-radius: 100px;
+    overflow: hidden;
+    height: 130px;
+    width: 130px;
+    position: relative;
+    margin: auto;
+    top: -60px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 0 6px #f0f0f0;
+    -webkit-box-shadow: 0 0 0 6px #f0f0f0;
+    -moz-box-shadow: 0 0 0 6px #f0f0f0;
+  }
+
+  /* h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  h4 {
+    font-size: 13px;
+    color: #00baff;
+    letter-spacing: 1px;
+    margin-bottom: 25px
+  }
+  p {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 20px;
+    color: #666;
+  } */
+
+
+.widget{
+  
+        float: left;
+        width: 100%;
+        /* background-color: #fff;
+        border-left: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        border-bottom: 1px solid #e4e4e4; */
+        margin-bottom: 20px;
+        /* -webkit-box-shadow: 0px 2px #e4e4e4;
+        -moz-box-shadow: 0px 2px #e4e4e4;
+        -ms-box-shadow: 0px 2px #e4e4e4;
+        -o-box-shadow: 0px 2px #e4e4e4;
+        box-shadow: 0px 2px #e4e4e4; */
+        
+    
+}
+.sd-title {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    display: grid;
+    text-align: center;
+}
+
+.job-list{
+    float: left;
+    width: 100%;
+    padding: 20px 20px;
+    font: inherit;
+    vertical-align: baseline;
+  
+}
+
+.job-info {
+    float: left;
+    width: 100%;
+}
+.job-details {
+    float: left;
+    width: 165px;
+}
+.ht-rate{
+    float: right;
+    width: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    
+}
+
+.sd-title h3 {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+    float: left;
+}
+.job-details h3 {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.job-details p {
+    color: #686868;
+    font-size: 14px;
+    line-height: 20px;
+}
+.hr-rate span {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    float: right;
+}

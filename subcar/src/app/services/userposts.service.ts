@@ -4,7 +4,6 @@ import { Observable , Subject } from 'rxjs';
 import { host } from '../models/host.model';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +22,7 @@ export class UserpostsService {
 
   constructor(private http:HttpClient) { }
   private _refreshNeeded$ = new Subject<void>();
+  private subject = new Subject<String>();
 
   get refreshNeeded$(){
     return this._refreshNeeded$;
@@ -69,6 +69,25 @@ export class UserpostsService {
       }));
   }
 
+  mostliked(){
+    return this.http.get(this.baseURL+'most/'+'liked')
+  }
+  sendpost(postId){
+    this.subject.next(postId)
+  }
+  
+  recivedpost():Observable<String>{
+  return this.subject.asObservable();
+  }
 
+  getallPosts():Observable<any>{
+    return this.http.get('http://localhost:3000/posts/get/posts')
+  }
+
+
+  allhosts(){
+ return this.http.get('http://localhost:3000/hosts/allhosts')
+  }
 }
+
  

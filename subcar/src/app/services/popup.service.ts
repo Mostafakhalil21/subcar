@@ -8,8 +8,11 @@ import { map, tap } from 'rxjs/operators';
 })
 export class PopupService {
 
-
+  key =  localStorage.getItem("user")
+  data = JSON.parse(this.key)
   hostURL: string = 'http://localhost:3000/hosts/';
+  id= this.data[Object.keys(this.data)[0]]
+
   
   private subject = new Subject<String>();
   private _refreshNeeded$ = new Subject<void>();
@@ -56,5 +59,12 @@ export class PopupService {
         map(res => res)
       
     )}
+
+
+    getuser(){
+      return this.http.get("http://localhost:3000/users/getuser/"+`${this.id}`).pipe(tap(() =>{
+        this._refreshNeeded$.next();
+      }));
+    }
 
 }

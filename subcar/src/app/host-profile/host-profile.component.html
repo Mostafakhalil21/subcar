@@ -2,7 +2,7 @@
 
 
 
-  
+  <div class="host-container">
   <app-hostnavbar></app-hostnavbar>
   <br><br>
   <flash-messages></flash-messages>
@@ -89,18 +89,17 @@
         </div> <!-- end col-->
 
         <div class="col-xl-7">
-            <div class="card">
-                <div class="card-body">
-     
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span style="height: 100%; margin-right: 7px;" class="input-group-text"><i class="fa fa-search"></i></span>
-                        </div>
-                        <input name="search" [(ngModel)]="searchFilter" type="text" class="form-control" placeholder="Search...">
-                    </div>
-                    <br><br>
+            <div style="margin-bottom: 8px;" class="input-group">
+                <div class="input-group-prepend">
+                    <span style="height: 100%; margin-right: 7px;" class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+                <input name="search" [(ngModel)]="searchFilter" type="text" class="form-control" placeholder="Search...">
+            </div>
+            <div class="card" *ngFor="let post of post | searchFilter: searchFilter">
+                <div class="card-body" >
+                   
                     <!-- Story Box-->
-                    <div class="border border-light p-2 mb-3" *ngFor="let post of post | searchFilter: searchFilter" >
+                    <div class="border border-light p-2 mb-3"  >
                         <div class="d-flex align-items-start">
                             <img class="me-2 avatar-sm rounded-circle" src="{{imagePath}}{{post.businessImg}}" >
                             <div class="w-100">
@@ -115,16 +114,16 @@
                                     <mat-icon>delete</mat-icon>
                                   <span>Delete</span>
                                 </button>
-                                <button mat-menu-item >
+                                <button   class="test" (click)="openEditPost()" (click)="sendPostDetails(post)"  >
                                     <mat-icon>edit</mat-icon>
-                                  <span>Edit</span>
+                                  <span  >Edit</span>
                                 </button>
                            
                               </mat-menu>
                               
                            
                         </div>
-                        <a><Strong>Car Model : </Strong>{{post.cartype}}</a>
+                        <a ><Strong>Car Model : </Strong>{{post.cartype}}</a>
                         <br>
                         <a><Strong>Car KMS : </Strong>{{post.kms}}Km</a>
                         <br>
@@ -138,22 +137,25 @@
                         <br>
                         <a><Strong>More Info : </Strong><br>{{post.desc}}</a>
                         <br><br>
-                            
+                        <div class="image-container">
+                            <div class="image">
                         <img src="{{imagePath}}{{post.img}}" alt="post-img" class="rounded me-1"  height="300">
-                        
-
+                        <div class="edit-icon">
+                            <label  (click)=" openImageEdit()" (click)="sendPostDetails(post._id)" > <mat-icon > insert_photo</mat-icon></label>
+                        </div>
+                    </div>
+                   
+                    </div>
                         <div class="mt-2">
-                            <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i class="mdi mdi-heart-outline"></i> {{post.likes.length}} Interested</a>
+                            <a ><i class="mdi mdi-heart-outline"></i> {{post.likes.length}}</a>
                         </div>
 
-                        <hr>
+            
                     </div>
 
             
 
-                    <div class="text-center">
-                        <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-spin mdi-loading me-1"></i> Load more </a>
-                    </div>
+            
                 </div>
             </div> <!-- end card-->
 
@@ -168,3 +170,5 @@
 </a>
 
 <app-footer></app-footer>
+
+</div>

@@ -11,6 +11,9 @@ import { HostChatService } from '../services/host-chat.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { LatlonService } from '../services/latlon.service';
 import {MatMenuModule} from '@angular/material/menu';
+import { EditPostComponent } from '../edit-post/edit-post.component';
+import { TestComponent } from '../test/test.component';
+import { EditPostImgComponent } from '../edit-post-img/edit-post-img.component';
 
 
 @Component({
@@ -102,6 +105,9 @@ export class HostProfileComponent implements OnInit {
 
  }
 
+sendPostDetails(post){
+  this.postservice.sendpost(post);
+}
 
 
   addItem(newItem: string) {
@@ -141,6 +147,8 @@ navigator.geolocation.getCurrentPosition((position) => {
 
   selectImage(event){
     this.img = event.target.files[0];
+    
+   
    
   }
 
@@ -184,6 +192,7 @@ navigator.geolocation.getCurrentPosition((position) => {
 
 
 
+
  open() {
   this.modealService.open(PostPopUpComponent, {size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
@@ -194,6 +203,21 @@ navigator.geolocation.getCurrentPosition((position) => {
 
 openEdit() {
   this.modealService.open(EditHostProfileComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
+openEditPost() {
+  this.modealService.open(EditPostComponent, {size: 'lg'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+openImageEdit() {
+  this.modealService.open(EditPostImgComponent, {size: 'md'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

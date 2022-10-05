@@ -1,0 +1,15 @@
+.card{
+    width: 100%;
+    border: none;
+    }
+    
+    .container{
+      display: flex;
+      justify-content: center;
+    }
+    .check{
+        border: none;
+       padding-top: 10px;
+       background: none;
+       color: green;
+    }

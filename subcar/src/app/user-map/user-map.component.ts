@@ -20,7 +20,7 @@ sortedarray:any=[]
   ngOnInit(): void {
 
     
-console.log(this.Markersrray)
+// console.log(this.Markersrray)
     this.getallhosts();
     var greenIcon = L.icon({
       iconUrl: 'leaf-green.png',
@@ -79,7 +79,7 @@ for(let j of this.sortedarray){
       }
   }
 }
- console.log(this.arrayofhoststoshow)
+//  console.log(this.arrayofhoststoshow)
 
 });
 

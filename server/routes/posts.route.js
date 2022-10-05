@@ -92,6 +92,22 @@ router.put("/posts/:id", async (req, res) => {
   }
 });
 
+router.put('/postimage/:id', upload.single('hostImage'), (req, res) => {
+ 
+
+  var post = {
+              img:req.file.path,
+         
+  };
+  Post.findByIdAndUpdate(req.params.id, {$set: post}, {new: true}, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log('Error in post Update :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
 
 //delete a post
 router.delete("/delete/:id/:userId", async (req, res) => {
@@ -198,12 +214,25 @@ router.get("/get/posts" , (req,res) =>{
 
 router.get("/get/code" , async (req ,res ) => {
   try{
-    const codes = await Post.find().distinct("userId")
+    const codes = await Post.find().distinct("code")
     res.status(200).json(codes)
   }catch(err){
     res.status(500).json(err)
   }
 })
+
+
+router.get('/most/liked', (req, res) => {
+  Post.find().sort({
+      likes: -1
+  }).limit(2).exec(function (err, docs) {
+      if (!err) {
+          res.send(docs);
+      } else {
+          console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2));
+      }
+  });
+});
 
 
 module.exports = router;

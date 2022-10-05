@@ -16,6 +16,8 @@ import { UserMapService } from '../services/user-map.service';
 import { ChatService } from '../services/chat.service';
 import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile.component';
 import { EditUserProfileService } from '../services/edit-user-profile.service';
+import { TestComponent } from '../test/test.component';
+import { PostDetailsComponent } from '../post-details/post-details.component';
 
 
 @Component({
@@ -31,10 +33,10 @@ export class HomeComponent implements OnInit {
   myDate = new Date();
   id= this.data[Object.keys(this.data)[0]]
   followingg = this.data[Object.keys(this.data)[4]]
+hostsArray;
 
-
-  
-  userData;
+  mostliked;
+  userData:any;
 following:object;
 closeResult = '';
 public searchFilter: any = '';
@@ -42,6 +44,16 @@ public searchFilter: any = '';
 code:any;
 userId:any;
 recommendedForMe:any=[]
+
+isFollowing:boolean=false;
+
+//user data
+userImage;
+name;
+username;
+email;
+userFollowing;
+
 imagePath:any='http://localhost:3000/';
   constructor(
 
@@ -61,11 +73,19 @@ imagePath:any='http://localhost:3000/';
     this.searchFilter=newItem;
   }
   ngOnInit(): void {
+    this.userpost.mostliked().subscribe((data)=> {
+      this.mostliked=data;
+    })
   this.usermapservice.recivedId().subscribe(data => {
     this.recommendedForMe=data;
   })
   this.edituserprofileService.getUserProfile().subscribe((data)=>{
     this.userData=data;
+    this.userImage=this.userData.userImage;
+    this.name=this.userData.name;
+    this.username=this.userData.username;
+    this.email=this.userData.email;
+    this.userFollowing=this.userData.following.length
   })
 
   this.chatService.recivedId().subscribe(data => {
@@ -76,23 +96,18 @@ imagePath:any='http://localhost:3000/';
       this.getallposts();
       this.getAllHosts();
       this.getfollowinghosts();
+      // this.allhosts();
 
     });
     this.getallposts();
     this.getAllHosts();
     this.getfollowinghosts();
     
- console.log(this.recommendedForMe)
+//  console.log(this.recommendedForMe)
   }
+  
 
-  checkIfFollowing(id){
-    for(let i of this.followingg){
-      if(i==id){
-        return true
-      }
-    }
-    return false
-  }
+
 
   checkifLiked(ArrayOfLikes){
     for(let i of ArrayOfLikes){
@@ -111,11 +126,9 @@ imagePath:any='http://localhost:3000/';
       let x = data;
       var merged = [].concat.apply([], x);
    
-      console.log(merged.sort(this.byDate))
+     merged.sort(this.byDate)
     merged.flat();
     merged.reverse();
-    let flatData=data.flat();
-    flatData.reverse();
     this.post=merged;
     
     })
@@ -128,20 +141,39 @@ imagePath:any='http://localhost:3000/';
     getAllHosts(){
       this.userpost.getAllHosts().subscribe((data) =>{
         this.hosts=data;
+    
       })
+    }
+
+    // allhosts(){
+    //   this.userpost.allhosts().subscribe((data)=> {
+    //        this.hostsArray=data;
+    //     this.checkIfFollowing()
+    //     console.log(this.hostsArray)
+    //   })
+    // }
+    checkIfFollowing(follower){
+      for(let i of follower){
+        if(i === this.id){
+          return true
+        }
+      }
+     
+     return false
     }
 followHost(host){
   this.userpost.followHost(host).subscribe((data)=> {
-   
+   location.reload();
   })
-
 }
 unfollowHost(host){
   this.userpost.UnfollowHost(host).subscribe((data)=> {
-   
+    location.reload();
   })
 
 }
+
+
 refresh(): void {
   window.location.reload();
 }
@@ -149,7 +181,7 @@ refresh(): void {
 sendhostdetails(hostid){
 this.popupservice.sendId(hostid)
 this.chatService.sendId(hostid)
-console.log(hostid)
+// console.log(hostid)
 
 }
 
@@ -179,6 +211,9 @@ sendSubmit(){
    
 }
 
+sendpostid(postId){
+  this.userpost.sendpost(postId);
+}
 openMessages(){
   this.modealService.open(UserChatComponent, {size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
@@ -189,6 +224,14 @@ openMessages(){
 
 open() {
   this.modealService.open(BusinessProfileComponent, {size: 'xl'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+openView() {
+ 
+  this.modealService.open(PostDetailsComponent, {size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -205,6 +248,7 @@ private getDismissReason(reason: any): string {
   }
 }
 openEdit() {
+  
   this.modealService.open(EditUserProfileComponent, {size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {

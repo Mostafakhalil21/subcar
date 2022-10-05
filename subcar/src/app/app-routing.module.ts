@@ -22,6 +22,9 @@ import { UserChatComponent } from './user-chat/user-chat.component';
 import { AboutComponent } from './about/about.component';
 import { UserMapComponent } from './user-map/user-map.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { TestComponent } from './test/test.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 const routes: Routes = [
   { path:'',pathMatch:'full',redirectTo:'about'},
@@ -45,6 +48,10 @@ const routes: Routes = [
   {path:'userchat' , component:UserChatComponent},
   {path:'usermap' , component:UserMapComponent},
   {path:'useredit' , component:EditUserProfileComponent},
+  {path:'test' , component:TestComponent},
+  {path:'postdetails' , component:PostDetailsComponent},
+  {path:'editpost' , component:EditPostComponent},
+
 
 
 
