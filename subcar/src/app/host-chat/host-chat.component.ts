@@ -8,7 +8,7 @@ import { HostChatService } from '../services/host-chat.service';
 })
 export class HostChatComponent implements OnInit {
 
-  
+
   message;
   receiverId;
  arraycontent:any=[]
@@ -16,12 +16,13 @@ export class HostChatComponent implements OnInit {
  filteredUsersArray:any=[]
 
  imagePath:any='http://localhost:3000/';
-
+img
+name;
  newUsersArray:any=[]
  key =  localStorage.getItem("host")
  data = JSON.parse(this.key)
  id= this.data[Object.keys(this.data)[0]]
-
+userdetails;
  contentMessagesArray:any=[];
  MyContentArray:any=[];
  newMyContentArray:any=[];
@@ -33,6 +34,13 @@ export class HostChatComponent implements OnInit {
   ngOnInit(): void {
     this.hostchatService.recivedId().subscribe((data)=>{
       this.receiverId=data;
+      for(let i of this.newUsersArray){
+        if(i._id == this.receiverId){
+        this.userdetails=i;
+        this.img=this.userdetails.userImage
+        this.name=this.userdetails.name;
+        }
+      }
     })
   this.getallusers();
 this.getallMessagesForHost();
@@ -89,6 +97,9 @@ console.log(this.newUsersArray)
 this.hostchatService.getsendermessages(id).subscribe((data) => {
 this.messagesArray=data;
 this.messagesArray.reverse();
+
+
+
 })
   }
   sendSubmit(){
@@ -105,6 +116,7 @@ this.messagesArray.reverse();
      this.message = '';
    
   }
+
 
 
 }

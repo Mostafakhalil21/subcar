@@ -44,6 +44,7 @@ const postSchema = new mongoose.Schema(
     },
     viewed:{
       type:Number,
+      default:0
     },
     price:{
       type:String,

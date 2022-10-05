@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
 hostsArray;
 
   mostliked;
+  mostViewed;
   userData:any;
 following:object;
 closeResult = '';
@@ -73,8 +74,12 @@ imagePath:any='http://localhost:3000/';
     this.searchFilter=newItem;
   }
   ngOnInit(): void {
+    console.log(this.recommendedForMe)
     this.userpost.mostliked().subscribe((data)=> {
       this.mostliked=data;
+    })
+    this.userpost.mostViewed().subscribe((data)=> {
+      this.mostViewed=data;
     })
   this.usermapservice.recivedId().subscribe(data => {
     this.recommendedForMe=data;
@@ -256,7 +261,11 @@ openEdit() {
   });
 }
 
-
+increaceView(id){
+  this.userpost.icreaceView(id).subscribe((data)=> {
+    console.log("increased")
+  })
+}
 
 
 }

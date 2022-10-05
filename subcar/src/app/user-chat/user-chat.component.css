@@ -169,7 +169,7 @@ body{
 
 .chat .chat-history .other-message:after {
     border-bottom-color: #e8f1f3;
-    left: 93%
+    left: 79%
 }
 
 .chat .chat-message {
@@ -208,7 +208,11 @@ body{
     clear: both;
     height: 0
 }
+.newPlace{
+    display: none;
+    
 
+}
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
@@ -231,6 +235,31 @@ body{
         height: 300px;
         overflow-x: auto
     }
+    .newPlace{
+        display: flex;
+        padding: 10px;
+        list-style: none;
+        flex-flow: row wrap;
+        align-items: center;
+       
+    }
+    .newPlace img{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 0;
+      padding: 1px;
+     
+       
+    }
+    .newPlace .about{
+    margin-right: 5px;
+    padding: 1px;
+   
+       
+         
+      }
+ 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -265,4 +294,7 @@ body{
     margin-left: 15px;
     font-size: 10px;
     
+}
+.container::-webkit-scrollbar{
+    display: none;
 }

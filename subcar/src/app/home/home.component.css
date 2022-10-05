@@ -163,6 +163,9 @@
 .list-group::-webkit-scrollbar{
     display: none;
 }
+.card::-webkit-scrollbar{
+    display: none;
+}
 
 .containere {
     width: 100%;

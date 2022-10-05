@@ -79,7 +79,7 @@ for(let j of this.sortedarray){
       }
   }
 }
-//  console.log(this.arrayofhoststoshow)
+ console.log(this.arrayofhoststoshow)
 
 });
 

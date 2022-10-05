@@ -73,12 +73,12 @@ export class AuthService {
 userlogout(){
   this.authToken = null ;
   this.user = null ;
-  localStorage.removeItem('user');
+  localStorage.removeItem('id_token');
 }
 hostlogout(){
   this.authToken = null ;
   this.user = null ;
-  localStorage.removeItem('host');
+  localStorage.removeItem('id_token');
 }
 //a function to check if we are logged in for the navbar navigation
 loggedIn(){

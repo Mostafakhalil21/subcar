@@ -49,13 +49,13 @@
                     <ul class="m-b-0" >
                         <li class="clearfix"*ngIf="i.receiver!=id" >
                             <div class="message-data text-right">
-                                <span  class="message-data-time float-right">{{i.createdAt| date:'shortTime'}}</span>
+                                <span  class="message-data-time float-right">{{i.createdAt| date:'short'}}</span><br>
                             </div>
                             <div   class="message other-message float-right">{{i.message}} </div>
                         </li>                              
                         <li class="clearfix" *ngIf="i.receiver==id" >
                             <div class="message-data">
-                                <span class="message-data-time">{{i.createdAt| date:'shortTime'}}</span>
+                                <span class="message-data-time">{{i.createdAt| date:'short'}}</span>
                             </div>
                             <div  class="message my-message">{{i.message}}</div>
                         </li>
@@ -73,6 +73,17 @@
             </div>
         </div>
     </form>
+    <ul class="newPlace" >
+        <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix" *ngFor="let i of newHostsArray | searchFilter: searchFilter">
+            <div class="imgContainer">
+            <img  src="{{imagePath}}{{i.businessImg}}" alt="avatar">
+            <div class="about">
+                <div   class="name">{{i.businessName}}</div>
+            </div>
+        </div>
+        </li>
+        
+    </ul>
         </div>
     </div>
 </div>

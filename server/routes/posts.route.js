@@ -234,5 +234,27 @@ router.get('/most/liked', (req, res) => {
   });
 });
 
+router.get('/most/viewed', (req, res) => {
+  Post.find().sort({
+      viewed: -1
+      
+  }).limit(5).exec(function (err, docs) {
+      if (!err) {
+          res.send(docs);
+      } else {
+          console.log('Error in Retriving views :' + JSON.stringify(err, undefined, 2));
+      }
+  });
+});
+
+router.put('/increase/view/:id' , async (req, res) => {
+try{
+ const post= await Post.findByIdAndUpdate({_id:req.params.id}, {$inc: { viewed: 1}});
+  res.status(200).json(post)
+
+}catch(err){
+  res.status(500).json(err)
+} 
+})
 
 module.exports = router;

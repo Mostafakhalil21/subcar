@@ -1,3 +1,4 @@
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="container">
@@ -15,37 +16,42 @@
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0" >
                     <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix"*ngFor="let i of newUsersArray">
-                        <img class="chat-image"  src="{{imagePath}}{{i.userImage}}" alt="avatar">
+                        <div class="imgContainer">
+                        <img  class="chat-image"  src="{{imagePath}}{{i.userImage}}" alt="avatar">
+                       
                         <div class="about">
                             <div    class="name">{{i.name}}</div>
                         </div>
+                    </div>
                     </li>
                     
                 </ul>
             </div>
            
             <div class="chat" >
+
                 <div class="chat-header clearfix">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                            </a>
+                        <div style="display: flex; align-items: center; " class="col-lg-6">
+                            <div class="imgContainer">
+                                <img *ngIf="img" src="{{imagePath}}{{img}}" >
+                            
                             <div class="chat-about">
-                                <h6 class="m-b-0"></h6>
+                                <h6 class="m-b-0">{{name}}</h6>
                             </div>
                         </div>
-                
+                    </div>
                     </div>
                 </div>
                 
                 
                     <div class="container" style="overflow: scroll; height: 400px;">
                         <div class="chat-history" *ngFor="let i of messagesArray" >
-                    <ul class="m-b-0" >
+                            
+                    <ul class="m-b-0"  >
                         <li class="clearfix" *ngIf="i.receiver!=id">
                             <div class="message-data text-right">
-                                <span  class="message-data-time float-right">{{i.createdAt| date:'shortTime'}}</span>
+                                <span  class="message-data-time float-right">{{i.createdAt| date:'short'}}</span><br>
                             </div>
                             <div   class="message other-message float-right"> {{i.message}}</div>
                         </li>                              
@@ -66,10 +72,26 @@
                         <input [(ngModel)]="message" name="message" type="text" class="form-control" placeholder="Enter text here...">                                    
                     </div>
                 </div>
+
             </div>
         </div>
+
     </form>
+    <ul class="newPlace" >
+        <li (click)="sendUserdetails(i._id)" (click)="getsendermessages(i._id)" class="clearfix"*ngFor="let i of newUsersArray">
+            <div class="imgContainer">
+            <img  class="chat-image"  src="{{imagePath}}{{i.userImage}}" alt="avatar">
+           
+            <div class="about">
+                <div    class="name">{{i.name}}</div>
+            </div>
+        </div>
+        </li>
+        
+    </ul>
 
         </div>
+        
     </div>
+    
 </div>

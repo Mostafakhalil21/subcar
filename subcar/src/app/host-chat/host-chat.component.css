@@ -2,10 +2,6 @@ body{
     background-color: #f4f7f6;
     margin-top:20px;
 }
-.chat-image{
-    clip-path: circle();
-
-}
 .card {
     background: #fff;
     transition: .5s;
@@ -173,7 +169,7 @@ body{
 
 .chat .chat-history .other-message:after {
     border-bottom-color: #e8f1f3;
-    left: 93%
+    left: 79%
 }
 
 .chat .chat-message {
@@ -213,6 +209,11 @@ body{
     height: 0
 }
 
+.newPlace{
+    display: none;
+    
+
+}
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
@@ -235,6 +236,28 @@ body{
         height: 300px;
         overflow-x: auto
     }
+    .newPlace{
+        display: flex;
+        padding: 10px;
+        list-style: none;
+        flex-flow: row wrap;
+        align-items: center;
+       
+    }
+    .newPlace img{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 0;
+     
+       
+    }
+    .newPlace .about{
+    margin-right: 5px;
+
+      }
+  
+ 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -258,11 +281,25 @@ body{
         overflow-x: auto
     }
 }
+.imgContainer{
+    display: flex;
+    align-items: center;
 
-.green {
-    background-color: green;
+
+}
+.imgContainer img{
+    width: 40px;
+    height: 40px;
 }
 
-.red {
-    background-color: red;
+.imgContainer .about{
+    font-weight: 500;
+    margin-left: 13px;
+    font-size: 10px;
+    
 }
+
+.container::-webkit-scrollbar{
+    display: none;
+}
+

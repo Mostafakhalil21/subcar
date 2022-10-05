@@ -88,6 +88,14 @@ export class UserpostsService {
   allhosts(){
  return this.http.get('http://localhost:3000/hosts/allhosts')
   }
+
+  icreaceView(id){
+    return this.http.put('http://localhost:3000/posts/increase/view/'+`${id}`,{})
+  }
+
+  mostViewed(){
+    return this.http.get('http://localhost:3000/posts/most/viewed')
+  }
 }
 
  
