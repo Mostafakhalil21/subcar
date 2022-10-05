@@ -47,6 +47,7 @@ import { TestComponent } from './test/test.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditPostImgComponent } from './edit-post-img/edit-post-img.component';
+import { HostAboutComponent } from './host-about/host-about.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { EditPostImgComponent } from './edit-post-img/edit-post-img.component';
     PostDetailsComponent,
     EditPostComponent,
     EditPostImgComponent,
+    HostAboutComponent,
     
   ],
   imports: [

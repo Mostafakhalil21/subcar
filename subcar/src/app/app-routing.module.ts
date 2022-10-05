@@ -25,6 +25,7 @@ import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.
 import { TestComponent } from './test/test.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { HostAboutComponent } from './host-about/host-about.component';
 
 const routes: Routes = [
   { path:'',pathMatch:'full',redirectTo:'about'},
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path:'test' , component:TestComponent},
   {path:'postdetails' , component:PostDetailsComponent},
   {path:'editpost' , component:EditPostComponent},
+  {path:'hostabout' , component:HostAboutComponent},
 
 
 

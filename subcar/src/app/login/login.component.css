@@ -161,3 +161,11 @@ body {
     }
 
   }
+  .about-icon{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 15px;
+    margin-left: 23px;
+    cursor: pointer;
+  }
