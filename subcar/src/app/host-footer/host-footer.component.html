@@ -1,0 +1,56 @@
+
+
+
+<footer class="container-fluid bg-grey py-5">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-6">
+             <div class="row">
+                <div class="col-md-6 ">
+                   <div class="logo-part">
+                      <img src="../../assets//images/logo.png" class="w-80 logo-footer" >
+                      <p>Subcar</p>
+                      <p>Exclusive to Subcar, start your Search online with newly Dealers expanded options. Including additional savings, no-charge reservation,all available from the comfort of your home.</p>
+                   </div>
+                </div>
+                <div class="col-md-6 px-4">
+                   <h6> About Subcar</h6>
+                   <a  class="btn-footer" routerLink="/hostabout"> More Info </a><br>
+                </div>
+             </div>
+          </div>
+          <div class="col-md-6">
+             <div class="row">
+                <div class="col-md-6 px-4">
+                   <h6> Help us</h6>
+                   <div class="row ">
+                      <div class="col-md-6">
+                         <ul>
+                            <li> <a routerLink="/hostprofile"> Home</a> </li>
+                            <li> <a routerLink="/hostabout"> About</a> </li>
+                           
+                         </ul>
+                      </div>
+                      <div class="col-md-6 px-4">
+                         <ul>
+                            <li> <a routerLink="/hostabout"> Become Host</a> </li>
+                            <li> <a routerLink="/hostabout"> Registor</a> </li>
+                           
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+                <div class="col-md-6 ">
+                   <h6>Search Post</h6>
+            
+                   <form class="form-footer my-3">
+                      <input name="search"  type="text"  placeholder="search here...." name="search"  #newItem>
+                      <input (click)="addNewItem(newItem.value)" type="button" value="Go" >
+                   </form>
+                   <p>Search your car</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    

@@ -74,11 +74,14 @@ userlogout(){
   this.authToken = null ;
   this.user = null ;
   localStorage.removeItem('id_token');
+  localStorage.removeItem('user');
 }
 hostlogout(){
   this.authToken = null ;
   this.user = null ;
   localStorage.removeItem('id_token');
+  localStorage.removeItem('host');
+
 }
 //a function to check if we are logged in for the navbar navigation
 loggedIn(){

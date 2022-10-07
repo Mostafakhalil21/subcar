@@ -48,6 +48,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditPostImgComponent } from './edit-post-img/edit-post-img.component';
 import { HostAboutComponent } from './host-about/host-about.component';
+import { HostFooterComponent } from './host-footer/host-footer.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { HostAboutComponent } from './host-about/host-about.component';
     EditPostComponent,
     EditPostImgComponent,
     HostAboutComponent,
+    HostFooterComponent,
     
   ],
   imports: [

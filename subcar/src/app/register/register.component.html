@@ -43,10 +43,13 @@
 
                   <!-- Password Confirmation -->
                   <div class="form-group col-lg-12 mx-auto mb-0">
-                   
-                    
+                    <div style="width: 60%;" class="img-container">
+                        <img style="width: 100%;"  [src]="imgURL" height="200" *ngIf="imgURL" alt="">
+          
+                    </div>
+                    <br>
                     <label class="btn btn-primary btn-block py-2" for="files">Upload Profile Picture</label>
-                    <input id="files" style="visibility:hidden;"  [(ngModel)]="userImage" name="userImage" type="file" placeholder="businessImg" (change)="selectImage($event)"  />
+                    <input id="files" style="visibility:hidden;"  [(ngModel)]="userImage" name="userImage" type="file" placeholder="businessImg" #file (change)="preview(file.files)" (change)="selectImage($event)"  />
                  
                 </div>
                 <br><br><br><br>

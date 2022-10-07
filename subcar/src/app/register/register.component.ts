@@ -14,7 +14,9 @@ export class RegisterComponent implements OnInit {
   name;
   email;
   userImage;
-
+  public imagePathh;
+  imgURL: any;
+  public message: string;
   
   constructor(
     private validateservice:ValidateService ,
@@ -45,7 +47,7 @@ export class RegisterComponent implements OnInit {
     //required fields
     if(!this.validateservice.validateRegister(formdata))
     {
-     this.flashMessage.show("please fill  all fields" , {cssClass: 'alert-danger' , timeout:3000});
+    
      
     }
     // validate Email 
@@ -71,6 +73,22 @@ export class RegisterComponent implements OnInit {
     })
    }
 
+   preview(files) {
+    if (files.length === 0)
+      return;
   
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+  
+    var reader = new FileReader();
+    this.imagePathh = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
+  }
 
 }

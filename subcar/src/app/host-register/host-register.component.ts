@@ -12,6 +12,9 @@ import { HostRegisterService } from '../services/host-register.service';
   styleUrls: ['./host-register.component.css']
 })
 export class HostRegisterComponent implements OnInit {
+  public imagePathh;
+  imgURL: any;
+  public message: string;
 
   businessName;
   password;
@@ -62,8 +65,7 @@ export class HostRegisterComponent implements OnInit {
     //required fields
     if(!this.validateservice.validateRegister(formdata))
     {
-     this.flashMessage.show("please fill  all fields" , {cssClass: 'alert-danger' , timeout:3000});
-     
+  
     }
     // validate Email 
     if(!this.validateservice.validateEmail(formdata.get("email")))
@@ -87,6 +89,24 @@ export class HostRegisterComponent implements OnInit {
      }
     })
  }
+
+ preview(files) {
+  if (files.length === 0)
+    return;
+
+  var mimeType = files[0].type;
+  if (mimeType.match(/image\/*/) == null) {
+    this.message = "Only images are supported.";
+    return;
+  }
+
+  var reader = new FileReader();
+  this.imagePathh = files;
+  reader.readAsDataURL(files[0]); 
+  reader.onload = (_event) => { 
+    this.imgURL = reader.result; 
+  }
+}
   
 
 }
